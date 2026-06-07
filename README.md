@@ -1,26 +1,35 @@
-# Kuply — kompletní web (prototyp)
+# Kuply — kompletní web + dashboardy (prototyp)
 
-Jeden statický soubor `index.html`, bez buildu a závislostí. Maskot **sova Sofia** (z tvého brand kitu) provází celým procesem.
+Jeden statický soubor `index.html`, bez buildu a závislostí. Maskot **sova Sofia** provází prodávající celým procesem. Vše ve světlém, prémiovém glassmorphism stylu z tvého kitu.
+
+## Demo přepínač (vpravo nahoře): Web · Prodávající · Investor · Tipař
+
+## Landing (Web) — důvěra a nízké bariéry pro prodávající
+- **Gamifikovaná oceňovačka v heru** — hned ukáže cenové **rozpětí**. Jak vyplňuješ lokalitu, dispozici, plochu a stav, cena se hýbe (▲/▼ delta), roste lišta přesnosti a Sofia komentuje. Framing je pozitivní: *někteří investoři zaplatí i nad odhad — a poznáte to během hodin*. CTA „Chci přesné nabídky" otevře hlavní formulář.
+- Bez cílení na investory. Důvěra přes **advokátní úschovu + Trinity Bank**, prověření katastru, reference, FAQ.
+- **Program Tipař** přímo na landingu (provize až 0,5 %).
+
+## Provázený formulář (Sofia pomáhá)
+4 kroky, Sofia u každého radí *proč* vyplnit kompletní info (= vyšší a víc nabídek). Krok **úschova**: výběr **Advokátní úschova** vs **Trinity Bank** + délka sběru 24/48/72 h.
+
+## Dashboard prodávajícího (světlý)
+Statistiky, nabídky investorů s **formou úhrady (hotovost/hypotéka) a termínem dokončení**, zlatá countdown karta s **Prodloužit** (nastavení času) i **Smazat prodej**, **chat se Sofií**, **FAQ**, právní semafor, oslavná obrazovka po přijetí.
+
+## Dashboard investora (bez Sofie)
+- **Rating nabídek A+/A/B + odhad. hrubý výnos %.**
+- Licitace naslepo: částka + **forma úhrady** (hotovost/hypotéka → **Trinity financování 3,99 %**) + **termín dokončení** (7/14/30/60 d).
+- **Doprovodné programy:** správa nemovitosti, rekonstrukce, financování Trinity, právní servis.
+- **Off-market:** investor nabídne vlastní nemovitost diskrétně dalším investorům.
+- **FAQ** pro investory.
+
+## Dashboard tipaře
+Formulář na tip + přehled tipů se stavy (Oslovujeme / Prodáno) a **provizí** za úspěšný tip.
 
 ## Brand
-- **Barvy i fonty z tvého kitu** (`kuply_cz-kit.html`): Bricolage Grotesque (nadpisy), Inter (text), JetBrains Mono (čísla); paleta paper/cream + gold + espresso + rust + sage.
-- **Sova Sofia** vložená 1:1 z `koupime-ads__1_.html` (pózy hero / peek / happy / wink / wow + animace bliknutí a třepot křídel).
-- Vizuál: teplý, prémiový **glassmorphism** (frosted sklo, jemný grain, zlaté přechody) — „future-tech", ale minimalistický. **Vše světlé**, žádné tmavé UI.
-
-## Co web obsahuje
-**Landing (Web):** hero s formulářem na leady hned navrchu · pruh s čísly · živý přehled aktivity · Jak to funguje (se Sofií) · Proč Kuply (benefity + srovnání) · Pro koho · Reference · Bezpečí a důvěra · sekce Pro investory · FAQ · CTA · patička.
-
-**Provázený formulář:** 4 kroky, Sofia u každého kroku radí (mění pózy a bubliny). Na konci spočítá odhad ceny a spustí sběr nabídek.
-
-**Dashboard prodávajícího (světlý, profi):** glass sidebar, statistiky, zlatá countdown karta, živě naskakující nabídky, sparkline trendu, 3D náhled, právní semafor, přijetí → oslavná obrazovka (Sofia).
-
-**Dashboard investora (světlý, profi):** glass sidebar + topbar s vyhledáváním, statistiky, taby, deal-flow karty s 3D náhledem, detail se slepou nabídkou.
-
-Vše propojené: co prodávající zadá, investor uvidí; co investor nabídne naslepo, vrátí se prodávajícímu v reálném čase. Přepínání rolí vpravo nahoře (Demo: Web / Prodávající / Investor). Data jsou ilustrativní a žijí v paměti (refresh = reset).
+Bricolage Grotesque + Inter + JetBrains Mono; paleta paper/cream + gold + espresso + rust; sova **Sofia** 1:1 z ad kitu (pózy + animace). Žádné tmavé UI.
 
 ## Nasazení na Vercel
-**A — přetažením:** vercel.com → New Project → přetáhni složku s `index.html`.
-**B — CLI:** `npm i -g vercel`, pak ve složce `vercel`. Žádná konfigurace.
+A) vercel.com → New Project → přetáhni složku. B) `npm i -g vercel`, pak `vercel`. Bez konfigurace.
 
-## Pro plný systém
-Logika je v jednom `<script>`: `store` (stav), `render()` (router), komponenty `Landing / Intake / Seller / Investor`, `shell()` (dashboard layout), maskot přes `<use href="#owl-…">`. `store` se nahradí backendem (Supabase: `properties`, `offers`), `pushOffer` realtime kanálem, `submitProperty` API + soukromým odkazem. Texty/čísla/reference jsou nahoře v polích (`TESTIMONIALS`, `FAQS`, `SITUATIONS`).
+## K propojení s backendem
+Logika v jednom `<script>`: `store` (stav) → router `render()` → `Landing / Intake / Seller / Investor / Tipar` + `shell()`. Stačí `store` nahradit API (např. Supabase: `properties`, `offers`, `tips`), `pushOffer` realtime kanálem. Cenový model = objekt `DISTRICTS`, rating = `gradeProp()`. Data, čísla i reference jsou ilustrativní (refresh = reset).
