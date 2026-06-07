@@ -33,3 +33,14 @@ A) vercel.com → New Project → přetáhni složku. B) `npm i -g vercel`, pak 
 
 ## K propojení s backendem
 Logika v jednom `<script>`: `store` (stav) → router `render()` → `Landing / Intake / Seller / Investor / Tipar` + `shell()`. Stačí `store` nahradit API (např. Supabase: `properties`, `offers`, `tips`), `pushOffer` realtime kanálem. Cenový model = objekt `DISTRICTS`, rating = `gradeProp()`. Data, čísla i reference jsou ilustrativní (refresh = reset).
+
+
+---
+
+## Novinky v této verzi
+- **Hero = tržní odhad podle preferovaného formuláře:** široké cenové pásmo s vizualizací na liště (min · STŘED · max), gamifikace s feedbackem **+%/−%** za každý faktor (lokalita, dispozice, plocha, stav, **patro**, **parkování**), Sofia komentuje.
+- **Tři pohledy na cenu** (sekce pod heroem): Portálový odhad · Bankovní odhad · ★ Přes Kuply (nejvyšší, „+X % proti portálu"). Čísla živě podle kalkulačky.
+- **Barvy:** tmavé informační bubliny a bandy překlopeny do **clay/rust gradientu** (reklama 1), primární CTA do rezavé (reklama 2). Žádná čerň.
+- **Prodávající → Moje nemovitost:** úprava údajů + dokumenty/smlouvy (Doplnit).
+- **Konec prodeje:** založení profilu + cross-sell (koupit nemovitost, právní služby, rekonstrukce, financování) — vytěžit maximum.
+- **Investor → Vyhrané nemovitosti:** výpis nákupů + po kliknutí **proces dokončení transakce** (smlouva → úschova → katastr → zápis → předání) a co je potřeba od investora (AML, účet, protokol).
