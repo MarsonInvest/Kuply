@@ -1,46 +1,27 @@
-# Kuply — kompletní web + dashboardy (prototyp)
+# Kuply — finální prototyp (landing pro leady + dashboardy)
 
-Jeden statický soubor `index.html`, bez buildu a závislostí. Maskot **sova Sofia** provází prodávající celým procesem. Vše ve světlém, prémiovém glassmorphism stylu z tvého kitu.
+Jeden soubor `index.html` (~507 kB), **bez CDN závislostí** — React, Tailwind i fotky jsou zkompilované a vložené přímo v souboru. Funguje offline, načítá se okamžitě, nasazení = přetáhnout na Vercel.
 
-## Demo přepínač (vpravo nahoře): Web · Prodávající · Investor · Tipař
+## Základ: tvůj `kuply-landingpage_pro_leady.html` — 1:1
+Design, texty, Sofi, dvě vstupní karty (Tržní odhad / Privátní rozbor), všechny sekce zachované beze změn. Upraveno jen to, co jsi zadal:
 
-## Landing (Web) — důvěra a nízké bariéry pro prodávající
-- **Gamifikovaná oceňovačka v heru** — hned ukáže cenové **rozpětí**. Jak vyplňuješ lokalitu, dispozici, plochu a stav, cena se hýbe (▲/▼ delta), roste lišta přesnosti a Sofia komentuje. Framing je pozitivní: *někteří investoři zaplatí i nad odhad — a poznáte to během hodin*. CTA „Chci přesné nabídky" otevře hlavní formulář.
-- Bez cílení na investory. Důvěra přes **advokátní úschovu + Trinity Bank**, prověření katastru, reference, FAQ.
-- **Program Tipař** přímo na landingu (provize až 0,5 %).
+1. **Formuláře se točí na místě** — každý krok rozboru vjede do pevného skleněného panelu jemnou 3D rotací (perspective + rotateY + blur). Stránka neskáče, panel stojí, obsah se vyměňuje. (Respektuje `prefers-reduced-motion`.)
+2. **Stupňující pořadí cen** — výsledek rozboru: **Bankovní → Portálový → ★ Privátní investorská** (nejvyšší, „+X % proti portálu"). Hodnoty i vizuální lišty rostou zleva doprava.
+3. **Výsledek až po kontaktu** — beze změny logiky tvého souboru (loading → nález → kontakt → odhalení).
+4. **Most do produktu** — po odhalení přibyl cocoa banner „DALŠÍ KROK · NEZÁVAZNĚ · 0 Kč" s CTA **„Spustit nabídky od investorů"** → založí nemovitost z dat rozboru a otevře dashboard prodávajícího; nabídky chodí živě (první ~92 % portálu, později i **nad odhad**).
+5. **Přepínač rolí v nav** — Web · Prodávající · Investor · Tipař (demo).
 
-## Provázený formulář (Sofia pomáhá)
-4 kroky, Sofia u každého radí *proč* vyplnit kompletní info (= vyšší a víc nabídek). Krok **úschova**: výběr **Advokátní úschova** vs **Trinity Bank** + délka sběru 24/48/72 h.
+## Dashboardy — stejný designový jazyk, skutečné fotky
+- **Fotky všude:** karty nemovitostí, náhled „Stav nemovitosti", modaly detailu i vyhraných — reálné výřezy z dodaných interiérových fotek (vložené ~80 kB). Pozadí dashboardu = sklo plovoucí nad teplou fotkou interiéru.
+- **Prodávající:** nabídky (hotovost/hypotéka + termín), countdown s Prodloužit/Smazat, **Moje nemovitost** (základní údaje zamčené se zdůvodněním, doplňující info + dokumenty editovatelné), chat se Sofií, FAQ, po prodeji profil + cross-sell.
+- **Investor:** rating A+/A/B + výnos %, slepá licitace (hotovost/hypotéka → Trinity 3,99 %, termín 7/14/30/60 d), **Vyhrané** s procesem dokončení transakce, doprovodné programy, off-market, FAQ.
+- **Tipař:** tipy + provize a stavy.
+- **Footer:** specialista Marek Král, 24/7 na příjmu, klikací telefon a e-mail.
 
-## Dashboard prodávajícího (světlý)
-Statistiky, nabídky investorů s **formou úhrady (hotovost/hypotéka) a termínem dokončení**, zlatá countdown karta s **Prodloužit** (nastavení času) i **Smazat prodej**, **chat se Sofií**, **FAQ**, právní semafor, oslavná obrazovka po přijetí.
+## Technika
+- React 18 + zkompilovaný JSX (žádný Babel v prohlížeči), Tailwind vygenerovaný staticky (9 kB), dashboard vrstva ve vanilla JS scopovaná pod `#dashWrap` (nekoliduje s landingem).
+- Ověřeno Playwrightem: celý lead flow proklikán (typ → adresa → m² → otázky → cíl → loading → kontakt → odhalení → spuštění nabídek), dashboardy, mobil 390 px — bez JS chyb.
+- Napojení na backend: `window.kuplyLaunch(payload)` je jediný most landing → produkt; v dashboardu nahradit `store` za API.
 
-## Dashboard investora (bez Sofie)
-- **Rating nabídek A+/A/B + odhad. hrubý výnos %.**
-- Licitace naslepo: částka + **forma úhrady** (hotovost/hypotéka → **Trinity financování 3,99 %**) + **termín dokončení** (7/14/30/60 d).
-- **Doprovodné programy:** správa nemovitosti, rekonstrukce, financování Trinity, právní servis.
-- **Off-market:** investor nabídne vlastní nemovitost diskrétně dalším investorům.
-- **FAQ** pro investory.
-
-## Dashboard tipaře
-Formulář na tip + přehled tipů se stavy (Oslovujeme / Prodáno) a **provizí** za úspěšný tip.
-
-## Brand
-Bricolage Grotesque + Inter + JetBrains Mono; paleta paper/cream + gold + espresso + rust; sova **Sofia** 1:1 z ad kitu (pózy + animace). Žádné tmavé UI.
-
-## Nasazení na Vercel
-A) vercel.com → New Project → přetáhni složku. B) `npm i -g vercel`, pak `vercel`. Bez konfigurace.
-
-## K propojení s backendem
-Logika v jednom `<script>`: `store` (stav) → router `render()` → `Landing / Intake / Seller / Investor / Tipar` + `shell()`. Stačí `store` nahradit API (např. Supabase: `properties`, `offers`, `tips`), `pushOffer` realtime kanálem. Cenový model = objekt `DISTRICTS`, rating = `gradeProp()`. Data, čísla i reference jsou ilustrativní (refresh = reset).
-
-
----
-
-## Novinky v této verzi
-- **Hero = tržní odhad podle preferovaného formuláře:** široké cenové pásmo s vizualizací na liště (min · STŘED · max), gamifikace s feedbackem **+%/−%** za každý faktor (lokalita, dispozice, plocha, stav, **patro**, **parkování**), Sofia komentuje.
-- **Tři pohledy na cenu** (sekce pod heroem): Portálový odhad · Bankovní odhad · ★ Přes Kuply (nejvyšší, „+X % proti portálu"). Čísla živě podle kalkulačky.
-- **Barvy:** tmavé informační bubliny a bandy překlopeny do **clay/rust gradientu** (reklama 1), primární CTA do rezavé (reklama 2). Žádná čerň.
-- **Prodávající → Moje nemovitost:** úprava údajů + dokumenty/smlouvy (Doplnit).
-- **Konec prodeje:** založení profilu + cross-sell (koupit nemovitost, právní služby, rekonstrukce, financování) — vytěžit maximum.
-- **Investor → Vyhrané nemovitosti:** výpis nákupů + po kliknutí **proces dokončení transakce** (smlouva → úschova → katastr → zápis → předání) a co je potřeba od investora (AML, účet, protokol).
+## Nasazení
+vercel.com → New Project → přetáhnout soubor. Hotovo.
