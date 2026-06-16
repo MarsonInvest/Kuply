@@ -446,6 +446,9 @@ section:has(.lc-wrap){overflow-x:clip}
    Pravidla: žádný filter:blur — záře jen přes radial-gradienty
    ============================================================ */
 .sf-mount{position:relative;display:inline-block;flex:none;font-size:0;line-height:0}
+.sf-owlimg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.sf-mount.is-thinking .sf-owlimg{animation:sfOwlBob 1.4s var(--ease) infinite}
+.sfl-owl{display:block;overflow:visible;will-change:transform;filter:drop-shadow(0 12px 16px rgba(47,38,32,.30))}
 .sf-mount[data-sofia]{background:none !important;box-shadow:none !important}
 .sf-orb{position:absolute;inset:0;border-radius:50%;overflow:hidden;
   background:
@@ -1213,6 +1216,108 @@ section:has(.lc-wrap){overflow-x:clip}
 #dashWrap .preview .pl{color:var(--ink-50);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-align:center;position:relative;z-index:1}
 #dashWrap .preview .pl svg{width:30px;height:30px;margin:0 auto 8px;display:block;color:var(--gold-d)}
 #dashWrap .spark{width:100%;height:54px;margin-top:6px}
+/* ── Strukturované porovnání nabídek (rozhodovací vrstva) ── */
+#dashWrap .cmp{margin-bottom:6px}
+#dashWrap .cmp-head{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-50);margin:2px 2px 10px}
+#dashWrap .cmp-head svg{width:14px;height:14px;color:var(--gold-d)}
+#dashWrap .cmp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(176px,1fr));gap:10px}
+#dashWrap .cmp-card{display:flex;flex-direction:column;gap:9px;border:1px solid var(--brd);border-radius:14px;padding:13px 14px;background:var(--p);transition:.2s}
+#dashWrap .cmp-card:hover{box-shadow:var(--sh-s);transform:translateY(-1px)}
+#dashWrap .cmp-card.win{border-color:rgba(201,168,118,.55);background:rgba(201,168,118,.09)}
+#dashWrap .cmp-card.safe{border-color:rgba(94,124,79,.40);background:rgba(94,124,79,.07)}
+#dashWrap .cmp-card.fast{border-color:rgba(181,102,58,.35);background:rgba(181,102,58,.06)}
+#dashWrap .cmp-lab{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase}
+#dashWrap .cmp-lab .ico{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;flex-shrink:0}
+#dashWrap .cmp-card.win .cmp-lab{color:var(--gold-d)} #dashWrap .cmp-card.win .cmp-lab .ico{background:var(--gold-l);color:var(--espresso)}
+#dashWrap .cmp-card.safe .cmp-lab{color:var(--positive)} #dashWrap .cmp-card.safe .cmp-lab .ico{background:rgba(94,124,79,.18);color:var(--positive)}
+#dashWrap .cmp-card.fast .cmp-lab{color:var(--rust)} #dashWrap .cmp-card.fast .cmp-lab .ico{background:rgba(181,102,58,.14);color:var(--rust)}
+#dashWrap .cmp-val{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--ink);line-height:1.05}
+#dashWrap .cmp-sub{font-size:11px;color:var(--ink-50);margin-top:3px}
+#dashWrap .cmp-who{font-size:12px;color:var(--ink-70);font-weight:600;display:flex;align-items:center;gap:5px}
+#dashWrap .cmp-who .veritick{width:13px;height:13px;color:var(--positive)}
+#dashWrap .cmp-pick{margin-top:auto;width:100%;justify-content:center}
+/* ── Conviction modál (přijetí nabídky) ── */
+#dashWrap .modal.modal-conv{max-width:540px}
+#dashWrap .conv-top{padding:28px 28px 0;text-align:center}
+#dashWrap .conv-top .owl{display:inline-block;margin-bottom:2px}
+#dashWrap .conv-h{font-family:'Bricolage Grotesque',sans-serif;font-size:23px;font-weight:700;letter-spacing:-.02em;margin-bottom:7px}
+#dashWrap .conv-sub{font-size:13.5px;color:var(--ink-70);max-width:33em;margin:0 auto;line-height:1.5}
+#dashWrap .conv-amt{font-family:'JetBrains Mono',monospace;font-size:33px;font-weight:600;color:var(--gold-d);letter-spacing:-.01em;margin:16px 0 8px;text-align:center}
+#dashWrap .conv-delta{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:4px 12px;border-radius:20px;background:rgba(94,124,79,.16);color:var(--positive)}
+#dashWrap .conv-delta.mut{background:var(--p2);color:var(--ink-60)}
+#dashWrap .conv-sum{margin:18px 0 0;border:1px solid var(--brd);border-radius:14px;padding:4px 16px;background:rgba(255,253,247,.5)}
+#dashWrap .conv-sum .dsem-row{padding:11px 0;border-bottom:1px solid var(--brd)}
+#dashWrap .conv-sum .dsem-row:last-child{border-bottom:0}
+#dashWrap .conv-note{display:flex;gap:10px;align-items:flex-start;font-size:12.5px;color:var(--ink-70);background:var(--p);border:1px solid var(--brd);border-radius:12px;padding:12px 14px;line-height:1.5;margin-top:14px}
+#dashWrap .conv-note svg{flex-shrink:0;color:var(--gold-d);margin-top:1px}
+#dashWrap .conv-acts{display:flex;gap:10px;margin-top:18px}
+#dashWrap .conv-acts .btn{flex:1;justify-content:center}
+@media(max-width:520px){#dashWrap .conv-acts{flex-direction:column-reverse}}
+#dashWrap .btn-danger{background:rgba(176,102,58,.12);color:var(--rust-d);border:1px solid rgba(176,102,58,.30)}
+#dashWrap .btn-danger:hover{background:rgba(176,102,58,.18);border-color:var(--rust-d)}
+/* ── Průběh převodu po přijetí (10 kroků, seller-friendly) ── */
+#dashWrap .tl{position:relative;margin:2px 0}
+#dashWrap .tl-step{display:flex;gap:14px;position:relative;padding-bottom:20px}
+#dashWrap .tl-step:last-child{padding-bottom:0}
+#dashWrap .tl-rail{position:relative;display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+#dashWrap .tl-node{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--p2);color:var(--ink-45);font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;border:1px solid var(--brd);z-index:1;transition:.3s}
+#dashWrap .tl-node .veritick{width:15px;height:15px}
+#dashWrap .tl-line{position:absolute;top:30px;bottom:-4px;width:2px;background:var(--brd)}
+#dashWrap .tl-step:last-child .tl-line{display:none}
+#dashWrap .tl-step.done .tl-node{background:rgba(94,124,79,.16);color:var(--positive);border-color:transparent}
+#dashWrap .tl-step.done .tl-line{background:rgba(94,124,79,.32)}
+#dashWrap .tl-step.active .tl-node{background:var(--g-gold);color:var(--espresso);border-color:transparent;box-shadow:0 0 0 4px rgba(201,168,118,.22)}
+#dashWrap .tl-body{padding-top:4px;min-width:0}
+#dashWrap .tl-t{font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#dashWrap .tl-step.wait .tl-t{color:var(--ink-50)}
+#dashWrap .tl-d{font-size:12.5px;color:var(--ink-60);margin-top:2px;line-height:1.45}
+#dashWrap .tl-tag{font-size:10px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:2px 8px;border-radius:20px;white-space:nowrap}
+#dashWrap .tl-tag.k{background:rgba(201,168,118,.18);color:var(--gold-d)}
+#dashWrap .tl-tag.fast{background:rgba(181,102,58,.14);color:var(--rust)}
+#dashWrap .tl-tag.now{background:var(--g-gold);color:var(--espresso)}
+/* ── Lead vetting banner (právní prověření hned u leadu) ── */
+#dashWrap .vetbar{display:flex;align-items:center;gap:16px;background:linear-gradient(135deg,rgba(201,168,118,.16),rgba(201,168,118,.05));border:1px solid rgba(201,168,118,.4);border-radius:16px;padding:16px 18px;margin-bottom:18px}
+#dashWrap .vetbar .vb-ic{width:42px;height:42px;border-radius:12px;background:var(--g-gold);color:var(--espresso);display:grid;place-items:center;flex-shrink:0}
+#dashWrap .vetbar .vb-ic svg{width:22px;height:22px;animation:vbpulse 1.8s ease-in-out infinite}
+@keyframes vbpulse{0%,100%{opacity:.55;transform:scale(.96)}50%{opacity:1;transform:scale(1)}}
+#dashWrap .vetbar .vb-t{font-size:14.5px;font-weight:700;color:var(--ink)}
+#dashWrap .vetbar .vb-d{font-size:12.5px;color:var(--ink-60);margin-top:2px;line-height:1.45;max-width:56ch}
+#dashWrap .vetbar .vb-pill{margin-left:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--gold-d);background:rgba(255,253,247,.7);border:1px solid rgba(201,168,118,.4);border-radius:20px;padding:5px 11px;white-space:nowrap}
+#dashWrap .dchip.vet{color:var(--gold-d)}
+/* ── Verified-lead badge (investor) ── */
+#dashWrap .deal-vfy{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--positive);margin-top:7px}
+#dashWrap .deal-vfy .veritick{width:14px;height:14px}
+#dashWrap .vfy-banner{display:flex;align-items:center;gap:11px;background:rgba(94,124,79,.10);border:1px solid rgba(94,124,79,.30);border-radius:12px;padding:11px 14px;margin-bottom:12px}
+#dashWrap .vfy-banner .vb2-ic{width:32px;height:32px;border-radius:9px;background:rgba(94,124,79,.18);color:var(--positive);display:grid;place-items:center;flex-shrink:0}
+#dashWrap .vfy-banner .vb2-ic svg{width:18px;height:18px}
+#dashWrap .vfy-banner b{font-size:13px;color:var(--ink)}
+#dashWrap .vfy-banner span{display:block;font-size:11.5px;color:var(--ink-60);margin-top:1px}
+/* ── Volba úschovy v conviction modálu ── */
+#dashWrap .conv-escrow{margin-top:16px}
+#dashWrap .ce-label{font-size:12px;font-weight:700;color:var(--ink-70);margin-bottom:9px}
+#dashWrap .ce-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#dashWrap .ce-opt{display:flex;align-items:center;gap:11px;text-align:left;border:1.5px solid var(--brd);border-radius:13px;padding:12px 13px;background:var(--p);transition:.18s;cursor:pointer;font-family:inherit}
+#dashWrap .ce-opt:hover{border-color:rgba(201,168,118,.5)}
+#dashWrap .ce-opt.on{border-color:var(--gold-d);background:rgba(201,168,118,.10);box-shadow:0 0 0 3px rgba(201,168,118,.14)}
+#dashWrap .ce-opt svg{width:22px;height:22px;color:var(--gold-d);flex-shrink:0}
+#dashWrap .ce-opt b{display:block;font-size:13px;color:var(--ink)}
+#dashWrap .ce-opt span{display:block;font-size:11px;color:var(--ink-50);margin-top:1px}
+@media(max-width:520px){#dashWrap .ce-opts{grid-template-columns:1fr}}
+/* ── Sidebar: připnutá Sofia karta ── */
+#dashWrap .side-sofi{margin:auto 2px 10px;padding:13px 14px;border-radius:16px;background:linear-gradient(150deg,rgba(201,168,118,.18),rgba(201,168,118,.04));border:1px solid rgba(201,168,118,.32)}
+#dashWrap .side-sofi .ss-head{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+#dashWrap .side-sofi .ss-head .owl{width:28px!important;height:28px!important}
+#dashWrap .side-sofi .ss-name{font-size:13px;font-weight:700;color:var(--ink)}
+#dashWrap .side-sofi .ss-tag{font-size:9px;font-weight:800;letter-spacing:.06em;color:var(--gold-d);background:rgba(255,253,247,.7);border:1px solid rgba(201,168,118,.4);border-radius:9px;padding:2px 6px;margin-left:auto}
+#dashWrap .side-sofi .ss-tip{font-size:11.5px;color:var(--ink-70);line-height:1.5;margin-bottom:11px}
+#dashWrap .side-sofi .ss-btn{width:100%;justify-content:center;padding:9px 12px;font-size:12.5px;gap:7px}
+#dashWrap .side-sofi .ss-btn svg{width:15px;height:15px}
+/* ── Další scény pozadí ── */
+#dashWrap .b-dusk{background:linear-gradient(160deg,#E8C9A0,#C97D52 45%,#5C3E1F)}
+#dashWrap .b-night{background:linear-gradient(160deg,#5C4D3E,#3D362E 55%,#1F1A14)}
+#dashWrap .app.bg-dusk::before{background-image:linear-gradient(160deg,#E8C9A0,#C97D52 45%,#5C3E1F)}
+#dashWrap .app.bg-night::before{background-image:linear-gradient(160deg,#5C4D3E,#3D362E 55%,#1F1A14)}
+@media(max-width:980px){#dashWrap .side-sofi{display:none}}
 #dashWrap .empty{text-align:center;padding:46px 20px;color:var(--ink-50);font-size:14px}
 #dashWrap .empty svg{width:38px;height:38px;margin:0 auto 12px;color:var(--ink-30);display:block}
 #dashWrap .live-blink{width:7px;height:7px;border-radius:50%;background:var(--rust-l);animation:lb 1.4s infinite}
@@ -1840,10 +1945,11 @@ section:has(.lc-wrap){overflow-x:clip}
 <div id="dashWrap" style="display:none">
 <div class="topbar"><div class="topbar-in">
   <div class="brand" onclick="go('landing')"><svg class="owl" viewBox="0 0 300 320"><use href="#owl-hero"/></svg><span class="brand-name">Kuply</span></div>
-  <div class="nav-right"><div class="bgsw" title="Pozadí dashboardu"><button class="bgs b-room" onclick="setBg('room')" title="Interiér"></button><button class="bgs b-light" onclick="setBg('light')" title="Zlaté světlo"></button><button class="bgs b-paper" onclick="setBg('paper')" title="Čistý papír"></button></div><span class="demo-lbl">Demo</span>
+  <div class="nav-right"><div class="bgsw" title="Pozadí dashboardu"><button class="bgs b-room" onclick="setBg('room')" title="Interiér"></button><button class="bgs b-light" onclick="setBg('light')" title="Zlaté světlo"></button><button class="bgs b-dusk" onclick="setBg('dusk')" title="Soumrak"></button><button class="bgs b-night" onclick="setBg('night')" title="Noc"></button><button class="bgs b-paper" onclick="setBg('paper')" title="Čistý papír"></button></div><span class="demo-lbl">Demo</span>
     <div class="demo-switch">
       <button class="dpill" id="p-landing" onclick="go('landing')">Web</button>
       <button class="dpill" id="p-seller" onclick="go('seller')">Prodávající</button>
+      <button class="dpill" id="p-loan" onclick="go('loan')">Žadatel půjčky</button>
       <button class="dpill" id="p-investor" onclick="go('investor')">Investor</button>
       <button class="dpill" id="p-tipar" onclick="go('tipar')">Tipař</button>
     </div></div>
@@ -2328,9 +2434,8 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (!el.style.width) { el.style.width = size + 'px'; el.style.height = size + 'px'; }
     var label = el.getAttribute('data-sf-label');
     el.innerHTML =
-      '<div class="sf-aura"></div><div class="sf-orb"><div class="sf-core"></div>' + EYES + '</div>' +
-      (size >= 30 ? '<div class="sf-orbit"><i></i><i></i><i></i></div>' : '') +
-      '<div class="sf-ring"></div>' +
+      '<div class="sf-aura"></div>' +
+      '<svg class="sf-owlimg" viewBox="0 0 300 320" aria-hidden="true"><use href="#owl-happy"></use></svg>' +
       (label ? '<div class="sf-label">' + label + '</div>' : '');
     setState(el, el.getAttribute('data-sf-state') || 'idle');
   }
@@ -2391,36 +2496,37 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
     if (!document.querySelector('[data-car3d]') && !document.querySelector('#root')) return;
 
     var mob = window.innerWidth < 768;
-    var SIZE = mob ? 46 : 64;
+    var SIZE = mob ? 48 : 72;
     var host = document.createElement('div');
     host.id = 'sofiaFlight';
     host.innerHTML =
       '<div class="sfl-trail t3"></div><div class="sfl-trail t2"></div><div class="sfl-trail t1"></div>' +
-      '<div class="sfl-orb" data-sofia data-sf-size="' + SIZE + '" style="width:' + SIZE + 'px;height:' + SIZE + 'px"></div>' +
+      '<svg class="sfl-owl" viewBox="0 0 320 240" width="' + Math.round(SIZE * 1.7) + '" height="' + Math.round(SIZE * 1.7 * 240 / 320) + '" aria-label="Sofia"><use href="#owl-fly"></use></svg>' +
       '<div class="sfl-bubble" id="sflBubble"></div>' +
       '<div class="sfl-tag">SOFIA</div>';
     document.body.appendChild(host);
     if (window.SofiaCore) SofiaCore.scan();
 
-    var orbEl = host.querySelector('[data-sofia]');
+    var owlEl = host.querySelector('.sfl-owl');
     var bubble = host.querySelector('#sflBubble');
     var trails = [].slice.call(host.querySelectorAll('.sfl-trail'));
-    var y = window.innerHeight * 0.34, ty = y, vy = 0;
-    var trailY = [y, y, y];
-    var lastScroll = window.scrollY, idleT = 0, lastT = performance.now();
+    var cx = -Math.min(window.innerWidth * 0.30, 360), cy = window.innerHeight * 0.30;
+    var vx = 0, vy = 0, prevX = cx, prevY = cy;
+    var trailP = [[cx, cy], [cx, cy], [cx, cy]];
+    var lastT = performance.now(), idleT = 0, speed = 0;
+    var mX = 0, mY = 0, mAct = -9999;
+    window.addEventListener('mousemove', function (e) { mX = e.clientX; mY = e.clientY; mAct = performance.now(); }, { passive: true });
 
     // klik na entitu -> otevřít existující Sofi chat
     host.addEventListener('click', function () {
       var btn = document.querySelector('.floating-sofi-btn');
       if (btn) btn.click();
-      if (window.SofiaCore) SofiaCore.set(orbEl, 'alert');
     });
 
     // kontextové promluvy u sekcí
     function say(txt, ms) {
       bubble.textContent = txt;
       bubble.classList.add('on');
-      if (window.SofiaCore) SofiaCore.set(orbEl, 'alert');
       clearTimeout(bubble.__t);
       bubble.__t = setTimeout(function () { bubble.classList.remove('on'); }, ms || 3200);
     }
@@ -2441,6 +2547,25 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       });
     }, { threshold: 0.6 });
     document.querySelectorAll('#root h2').forEach(function (h) { io.observe(h); });
+    // Sofi přiletí k hlavnímu CTA a řekne, co bude dál a proč
+    var CTASAYS = [
+      ['privátní rozbor', 'Dál ti zpřesním cenu z ±15 % na ±3 % a pustím k tobě investory — konkrétní kupec o tvůj byt zaplatí víc než portálový průměr.'],
+      ['nabídky od investor', 'Teď to spustím: prověření investoři pošlou závazné nabídky naslepo. Nejvyšší klidně překoná i odhad.'],
+      ['půjč', 'Dál ti seženu nabídky půjček proti nemovitosti. Nemovitost ti zůstává — jen ji dáš do zástavy.'],
+      ['Začít rozbor', 'Pojď do toho — provedu tě krok za krokem až k penězům v úschově.']
+    ];
+    var seenCta = {};
+    var ctaio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var t = (e.target.textContent || '');
+        for (var i = 0; i < CTASAYS.length; i++) {
+          if (!seenCta[CTASAYS[i][0]] && t.indexOf(CTASAYS[i][0]) > -1) { seenCta[CTASAYS[i][0]] = 1; say(CTASAYS[i][1], 5200); break; }
+        }
+      });
+    }, { threshold: 1 });
+    function scanCtas() { document.querySelectorAll('#root .btn-primary, #root .btn-gold.btn-lg, #root .btn-pri.btn-lg').forEach(function (b) { if (!b.__ctaObs) { b.__ctaObs = 1; ctaio.observe(b); } }); }
+    scanCtas(); setInterval(scanCtas, 1500);
     setTimeout(function () { say('Dobrý den, jsem Sofia. Provedu vás.', 3600); }, 1600);
 
     var rt = document.getElementById('root');
@@ -2448,44 +2573,64 @@ function(a,b,c){if(!Vd(b))throw Error(m(200));return Wd(null,a,b,!1,c)};Q.unmoun
       var now = performance.now();
       var dt = Math.min(150, now - lastT); lastT = now;
 
-      // landing-only viditelnost
+      // viditelnost jen na landingu
       var landing = !rt || rt.style.display !== 'none';
       host.style.display = landing ? '' : 'none';
       if (!landing) { requestAnimationFrame(tick); return; }
 
-      // cíl: dock u otevřené konzole, jinak letová hladina dle scrollu
+      var vw = window.innerWidth, vh = window.innerHeight, mob = vw < 768;
+      var tx, ty;
+
       var cw = document.querySelector('.console-wrap');
       if (cw) {
+        // dock u otevřené konzole
         var r = cw.getBoundingClientRect();
-        ty = Math.min(window.innerHeight - 120, Math.max(86, r.top + 26));
-        if (orbEl.__m !== 'think') { orbEl.__m = 'think'; if (window.SofiaCore) SofiaCore.set(orbEl, 'thinking'); }
+        tx = -Math.min(vw * 0.30, 340);
+        ty = Math.min(vh - 120, Math.max(86, r.top + 26));
       } else {
-        var sc = window.scrollY;
-        var dv = sc - lastScroll; lastScroll = sc;
-        idleT = Math.abs(dv) > 1 ? 0 : idleT + dt;
-        ty = window.innerHeight * 0.34 + Math.max(-90, Math.min(90, dv * 2.4));
-        if (Math.abs(dv) > 14 && orbEl.__m !== 'think') {
-          orbEl.__m = 'think'; if (window.SofiaCore) SofiaCore.set(orbEl, 'thinking');
-        } else if (idleT > 700 && orbEl.__m !== 'idle') {
-          orbEl.__m = 'idle'; if (window.SofiaCore) SofiaCore.set(orbEl, 'idle');
+        // plynulá dráha: autonomní drift + JEMNÝ vliv scroll progresu (ne delta = žádné poskakování)
+        var de = document.documentElement;
+        var prog = Math.max(0, Math.min(1, window.scrollY / Math.max(1, de.scrollHeight - vh)));
+        if (mob) {
+          tx = -(10 + Math.sin(now / 2600) * 8);
+          ty = vh * (0.22 + 0.30 * prog) + Math.sin(now / 1900) * 16;
+        } else {
+          tx = -(Math.min(vw * 0.30, 360) + Math.sin(now / 2600) * 78 + Math.cos(now / 4300) * 40);
+          ty = vh * (0.24 + 0.34 * prog) + Math.sin(now / 1900) * 22 + Math.cos(now / 3100) * 12;
+          // interaktivita: jemný náklon dráhy k myši
+          if (now - mAct < 2200) {
+            var ox = vw - Math.min(46, Math.max(14, vw * 0.03));
+            tx = tx * 0.72 + ((mX - ox) - SIZE / 2) * 0.28;
+            ty = ty * 0.72 + (mY - SIZE / 2) * 0.28;
+          }
         }
       }
 
-      // lerp + dojezd + náklon dle rychlosti
-      var k = RM ? 1 : 1 - Math.pow(0.9, dt / 16.7);
-      var py = y; y += (ty - y) * k; vy = y - py;
-      var bob = RM ? 0 : Math.sin(now / 900) * 4;
-      var tilt = Math.max(-13, Math.min(13, vy * 1.1));
-      host.style.transform = 'translate3d(0,' + (y + bob).toFixed(1) + 'px,0)';
-      orbEl.style.transform = 'rotate(' + tilt.toFixed(1) + 'deg)';
+      // bezpečná zóna (nepřekrýt obsah vlevo)
+      tx = Math.max(-Math.min(vw * (mob ? 0.62 : 0.46), 540), Math.min(-6, tx));
+      ty = Math.max(60, Math.min(vh - 96, ty));
 
-      // trail s odstupňovaným zpožděním
+      // setrvačné dojetí na obou osách (lerp s inercií)
+      var k = RM ? 1 : 1 - Math.pow(0.86, dt / 16.7);
+      prevX = cx; prevY = cy;
+      cx += (tx - cx) * k; cy += (ty - cy) * k;
+      vx = cx - prevX; vy = cy - prevY;
+      speed = Math.abs(vx) + Math.abs(vy);
+      idleT = speed < 0.35 ? idleT + dt : 0;
+
+      // náklon sovy do směru letu + jemné dýchání
+      var tilt = Math.max(-16, Math.min(16, vx * 0.6 + vy * 0.42));
+      var pulse = RM ? 1 : 1 + Math.sin(now / 1400) * 0.025;
+      host.style.transform = 'translate3d(' + cx.toFixed(1) + 'px,' + cy.toFixed(1) + 'px,0)';
+      owlEl.style.transform = 'rotate(' + tilt.toFixed(1) + 'deg) scale(' + pulse.toFixed(3) + ')';
+
+      // 2D comet trail
       trails.forEach(function (tr, i) {
-        var lag = 0.10 - i * 0.025;
-        trailY[i] += ((y + bob) - trailY[i]) * (RM ? 1 : lag * (dt / 16.7));
-        var dy = trailY[i] - (y + bob);
-        tr.style.transform = 'translate3d(' + (8 + i * 3) + 'px,' + dy.toFixed(1) + 'px,0)';
-        tr.style.opacity = String(Math.min(0.55, Math.abs(vy) * 0.10 + 0.06));
+        var lag = RM ? 1 : Math.min(1, (0.16 - i * 0.04) * (dt / 16.7));
+        trailP[i][0] += (cx - trailP[i][0]) * lag;
+        trailP[i][1] += (cy - trailP[i][1]) * lag;
+        tr.style.transform = 'translate3d(' + (trailP[i][0] - cx).toFixed(1) + 'px,' + (trailP[i][1] - cy).toFixed(1) + 'px,0)';
+        tr.style.opacity = String(Math.min(0.5, speed * 0.06 + 0.05));
       });
 
       requestAnimationFrame(tick);
@@ -4716,10 +4861,12 @@ const SofiBubbleInline = ({
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 
 const QuickCall = () => {
-  const [name, setName] = useState('');
+  const [prop, setProp] = useState('');
+  const [amount, setAmount] = useState('');
+  const [term, setTerm] = useState(5);
   const [tel, setTel] = useState('');
   const [sent, setSent] = useState(false);
-  const valid = tel.replace(/[^\d]/g, '').length >= 9;
+  const valid = tel.replace(/[^\d]/g, '').length >= 9 && amount.replace(/[^\d]/g, '').length >= 5;
   if (sent) return /*#__PURE__*/React.createElement("div", {
     className: "flex flex-col items-center justify-center text-center",
     style: {
@@ -4740,14 +4887,14 @@ const QuickCall = () => {
       fontSize: 'var(--fs-h3)',
       marginTop: 16
     }
-  }, "D\u011Bkuji", name ? ', ' + name.split(' ')[0] : '', "."), /*#__PURE__*/React.createElement("p", {
+  }, "D\u011Bkuji."), /*#__PURE__*/React.createElement("p", {
     className: "t-soft",
     style: {
       fontSize: 14.5,
       marginTop: 8,
       maxWidth: 300
     }
-  }, "Specialista v\xE1m zavol\xE1 ", /*#__PURE__*/React.createElement("b", null, "do 15 minut"), " na ", /*#__PURE__*/React.createElement("b", {
+  }, "Připravíme nezávazné nabídky půjček a ozveme se ", /*#__PURE__*/React.createElement("b", null, "do 15 minut"), " na ", /*#__PURE__*/React.createElement("b", {
     style: {
       whiteSpace: 'nowrap'
     }
@@ -4762,14 +4909,51 @@ const QuickCall = () => {
     }
   }, /*#__PURE__*/React.createElement("input", {
     className: "lc-input",
-    placeholder: "Va\u0161e jm\xE9no",
-    value: name,
-    onChange: e => setName(e.target.value)
+    placeholder: "Nemovitost \u2014 typ, lokalita, plocha",
+    value: prop,
+    onChange: e => setProp(e.target.value)
   }), /*#__PURE__*/React.createElement("input", {
+    className: "lc-input",
+    inputMode: "numeric",
+    placeholder: "Kolik pot\u0159ebuji p\u016fj\u010dit (K\u010d)",
+    value: amount,
+    onChange: e => setAmount(e.target.value)
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 7,
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      color: 'var(--ink-60)',
+      whiteSpace: 'nowrap',
+      marginRight: 2
+    }
+  }, "Na jak dlouho"), [1, 3, 5, 10].map(function (yr) {
+    return /*#__PURE__*/React.createElement("button", {
+      key: yr,
+      type: "button",
+      onClick: () => setTerm(yr),
+      style: {
+        flex: 1,
+        padding: '7px 0',
+        borderRadius: 10,
+        fontFamily: 'inherit',
+        fontSize: 12.5,
+        fontWeight: 600,
+        cursor: 'pointer',
+        border: term === yr ? '1.5px solid var(--gold-d)' : '1px solid var(--rule-s)',
+        background: term === yr ? 'rgba(201,168,118,.14)' : 'transparent',
+        color: term === yr ? 'var(--gold-d)' : 'var(--ink-70)'
+      }
+    }, yr + (yr === 1 ? ' rok' : yr < 5 ? ' roky' : ' let'));
+  })), /*#__PURE__*/React.createElement("input", {
     className: "lc-input",
     type: "tel",
     inputMode: "tel",
-    placeholder: "+420 777 123 456",
+    placeholder: "Telefon — ozveme se s nabídkou",
     value: tel,
     onChange: e => setTel(e.target.value)
   }), /*#__PURE__*/React.createElement("button", {
@@ -4780,8 +4964,8 @@ const QuickCall = () => {
       opacity: .45,
       cursor: 'not-allowed'
     } : null,
-    onClick: () => valid && setSent(true)
-  }, "Zavolejte mi ", /*#__PURE__*/React.createElement(Icon, {
+    onClick: () => valid && window.kuplyLoan({ prop: prop, amount: amount, term: term, phone: tel })
+  }, "Chci nabídku půjčky ", /*#__PURE__*/React.createElement(Icon, {
     name: "i-arr",
     size: 14
   })), /*#__PURE__*/React.createElement("div", {
@@ -4794,7 +4978,7 @@ const QuickCall = () => {
   }, /*#__PURE__*/React.createElement(Icon, {
     name: "i-lock",
     size: 11
-  }), " \u017D\xE1dn\xFD spam \u2014 jeden hovor, nic v\xEDc."));
+  }), " Bez z\u00E1vazku \u2014 nemovitost v\u00E1m z\u016Fst\u00E1v\u00E1."));
 };
 const Hero = () => {
   const [path, setPath] = useState(null); // null | 'quick' | 'private'
@@ -5016,19 +5200,19 @@ const Hero = () => {
     style: {
       color: 'var(--rust)'
     }
-  }, "ZAVOL\xC1ME DO 15 MINUT"), /*#__PURE__*/React.createElement("h2", {
+  }, "PŮJČKA SE ZÁSTAVOU NEMOVITOSTI"), /*#__PURE__*/React.createElement("h2", {
     className: "display-tight mb-2",
     style: {
       fontSize: 'var(--fs-h3)',
       letterSpacing: '-.03em'
     }
-  }, "Rychl\xE1 konzultace"), /*#__PURE__*/React.createElement("p", {
+  }, "Peníze bez prodeje"), /*#__PURE__*/React.createElement("p", {
     className: "t-soft",
     style: {
       fontSize: 14.5,
       lineHeight: 1.5
     }
-  }, "Dv\u011B pole. \u017D\xE1dn\xE1 registrace, \u017E\xE1dn\xFD z\xE1vazek."), /*#__PURE__*/React.createElement(QuickCall, null), /*#__PURE__*/React.createElement("div", {
+  }, "\u0158ekn\u011Bte n\u00E1m o nemovitosti, kolik pot\u0159ebujete a na jak dlouho \u2014 p\u0159iprav\u00EDme nab\u00EDdku p\u016Fj\u010Dky se z\u00E1stavou. Nemovitost v\u00E1m z\u016Fst\u00E1v\u00E1."), /*#__PURE__*/React.createElement(QuickCall, null), /*#__PURE__*/React.createElement("div", {
     className: "lc-veil"
   }))), /*#__PURE__*/React.createElement("div", {
     className: "lc-pills"
@@ -5041,7 +5225,7 @@ const Hero = () => {
   }, "Rozbor"), /*#__PURE__*/React.createElement("button", {
     type: "button",
     className: "lc-pill"
-  }, "Konzultace")), /*#__PURE__*/React.createElement("div", {
+  }, "Půjčka")), /*#__PURE__*/React.createElement("div", {
     className: "lc-hint"
   }, "\u2190 P\u0158ET\xC1HN\u011ATE NEBO ZVOLTE \u2192"), /*#__PURE__*/React.createElement("div", {
     className: "lc-live"
@@ -6021,9 +6205,10 @@ const SITUATIONS=[['home','Stěhování za prací','Nová práce v jiném měst�
 const FAQS=[['Kolik mě to stojí?','Pro vás jako prodávajícího nic. Naši odměnu hradí investor, který nemovitost kupuje. Vy zaplatíte 0 Kč a žádné skryté poplatky.'],['Můžu dostat víc, než je odhad?','Ano, a často se to děje. Každý investor má jiné priority — pro někoho je vaše lokalita nebo dispozice přesně to, co hledá, a je ochoten zaplatit nad běžný odhad. Není to soutěž o nejnižší cenu, ale o vás.'],['Musím nabídku přijmout?','Ne. Nabídky jsou nezávazné — rozhodujete jen vy. Když vám žádná nesedí, nic se neděje a nic neplatíte.'],['Kdo hlídá peníze a smlouvy?','Úschovu kupní ceny i smlouvy zajišťuje naše partnerská advokátní kancelář nebo Trinity Bank — vyberete si při zadání. Peníze jdou přes nezávislou úschovu, ne na náš účet.'],['Co když má byt hypotéku, exekuci nebo podíly?','Zvládneme i složitější případy. Stav prověříme v katastru hned na začátku a investoři ho znají dopředu.'],['Jak je to s mým soukromím?','Vaši adresu ani jméno investoři nevidí — jen čtvrť a parametry. Identita se odemkne až ve chvíli, kdy nabídku sami přijmete.']];
 const IFAQS=[['Jak funguje slepá nabídka?','Vidíte nemovitost, rating i prověření katastru, ale nevidíte nabídky ostatních investorů. Posíláte svoji nejlepší cenu — vyhrává nejlepší nabídka pro prodávajícího.'],['Co znamená rating A+/A/B?','Interní hodnocení atraktivity dealu z lokality, stavu, dispozice a odhadovaného hrubého výnosu. A+ = nadprůměrný potenciál, B = standardní.'],['Mohu platit hypotékou?','Ano. U nabídky zvolíte hotovost nebo hypotéku a termín dokončení. K hypotéce nabízíme předschválené financování přes Trinity Bank.'],['Co jsou doprovodné programy?','Správa nemovitosti, rekonstrukce a financování od ověřených partnerů — objednáte přímo z dashboardu po nákupu.'],['Můžu nabídnout vlastní nemovitost?','Ano, diskrétně a off-market vybraným prověřeným investorům, bez veřejného inzerátu.']];
 
-const store={view:'landing',intakeStep:1,tab:'flow',openDeal:null,openWon:null,won:[],nav:'overview',inav:'flow',properties:[],myPropId:null,feed:[],tips:[],chat:[],extendOpen:false,bidFinance:'cash',bidDays:14,
+const store={view:'landing',intakeStep:1,tab:'flow',openDeal:null,openWon:null,won:[],nav:'overview',inav:'flow',properties:[],myPropId:null,feed:[],tips:[],chat:[],extendOpen:false,confirmOffer:null,confirmDelete:false,acceptEscrow:'advokat',bidFinance:'cash',bidDays:14,
   calc:{district:DLIST[0],type:'2+kk',m2:58,condition:'Dobrý stav',park:'Modré zóny / volné',floor:'3.–5. patro s výtahem',touched:{},shownLo:0,shownHi:0,bubble:'Vyplňte pár údajů a sledujte, jak se odhad zpřesňuje a posouvá.'},
-  draft:{district:DLIST[0],type:'2+kk',m2:58,floor:'3. patro',condition:'Dobrý stav',addr:'',phone:'',email:'',hours:48,uploaded:false,escrow:'advokat'}};
+  draft:{district:DLIST[0],type:'2+kk',m2:58,floor:'3. patro',condition:'Dobrý stav',addr:'',phone:'',email:'',hours:48,uploaded:false,escrow:'advokat'},
+  ln:{step:0,draft:{type:'Byt 3+kk',district:DLIST[0],m2:74,condition:'Dobrý stav',value:0,valMode:'auto',posudek:false,amount:3500000,term:5,name:'',email:'',phone:'',propNote:''},lead:null,offers:[],accepted:null,confirm:null},lnNav:'overview',openLoan:null,lnInv:{rate:7.4,amount:0,term:5,fee:1}};
 
 const PARKF={'Garáž / vyhrazené stání':1.03,'Modré zóny / volné':1.0,'Bez parkování':0.97};
 const FLOORF={'3.–5. patro s výtahem':1.03,'Přízemí / 1. patro':0.97,'Vyšší bez výtahu':0.95,'Nezáleží':1.0};
@@ -6040,7 +6225,7 @@ function mkProp(district,type,m2,floor,condition,est,hours,addr){return{id:uid()
 function pushOffer(p,investor,amount,verified,silent,meta){meta=meta||{};const o={id:uid(),investor,amount:Math.round(amount/1000)*1000,ts:now(),verified,mine:!verified&&!silent,finance:meta.finance||(Math.random()>0.5?'Hotovost':'Hypotéka'),days:meta.days||[7,14,30][Math.floor(Math.random()*3)]};p.offers.push(o);p.offers.sort((a,b)=>b.amount-a.amount);if(!silent&&(store.view==='seller'||store.view==='investor'))render();return o;}
 const MOCK_INV=['Vltava Capital','BytFond a.s.','Reinvest CZ','Privátní investor','Domov Invest'];
 function scheduleMockOffers(p){[4000,9000,15000].forEach((ms,i)=>{setTimeout(()=>{if(p.status!=='active')return;const lvl=[0.92,0.97,1.02][i];pushOffer(p,MOCK_INV[Math.floor(Math.random()*MOCK_INV.length)],p.estimate*lvl*(1+(Math.random()*0.02-0.01)),true,false);if(store.view==='seller')toast('Nová nabídka od investora');},ms);});}
-function seedProperties(){[{district:'Praha 2 – Vinohrady',type:'3+kk',m2:84,condition:'Dobrý stav',floor:'4. patro',h:36},{district:'Praha 7 – Holešovice',type:'2+kk',m2:55,condition:'Původní stav',floor:'2. patro',h:18},{district:'Brno – Žabovřesky',type:'2+1',m2:62,condition:'Před rekonstrukcí',floor:'1. patro',h:60}].forEach((s,i)=>{const est=estimate(s);const p=mkProp(s.district,s.type,s.m2,s.floor,s.condition,est,s.h,'');if(i===0){pushOffer(p,'INV-'+uid(),est*0.95,true,true);pushOffer(p,'INV-'+uid(),est*1.01,true,true);}if(i===1){pushOffer(p,'INV-'+uid(),est*0.93,true,true);}store.properties.push(p);});}
+function seedProperties(){[{district:'Praha 2 – Vinohrady',type:'3+kk',m2:84,condition:'Dobrý stav',floor:'4. patro',h:36},{district:'Praha 7 – Holešovice',type:'2+kk',m2:55,condition:'Původní stav',floor:'2. patro',h:18},{district:'Brno – Žabovřesky',type:'2+1',m2:62,condition:'Před rekonstrukcí',floor:'1. patro',h:60}].forEach((s,i)=>{const est=estimate(s);const p=mkProp(s.district,s.type,s.m2,s.floor,s.condition,est,s.h,'');if(i===0){pushOffer(p,'INV-'+uid(),est*0.95,true,true);pushOffer(p,'INV-'+uid(),est*1.01,true,true);}if(i===1){pushOffer(p,'INV-'+uid(),est*0.93,true,true);}p.vetted=true;store.properties.push(p);});}
 function seedTips(){store.tips=[{id:uid(),name:'Sousedka z 3. patra',loc:'Praha 5 – Smíchov',note:'Zvažuje prodej po stěhování',status:'contact',comm:35000},{id:uid(),name:'Kolega Tomáš',loc:'Brno – Žabovřesky',note:'Zdědil byt',status:'sold',comm:42000}];}
 function seedWon(){store.won=[
   {id:uid(),district:'Praha 5 – Smíchov',type:'2+kk',m2:54,price:5320000,finance:'Hotovost',date:'před 2 dny',steps:[['Smlouva podepsána','done'],['Úschova kupní ceny','done'],['Návrh na vklad do katastru','active'],['Zápis vlastnictví','wait'],['Předání nemovitosti','wait']]},
@@ -6062,9 +6247,9 @@ function render(){
   const dash=true;
   document.querySelectorAll('.bgs').forEach(function(b){b.classList.toggle('on',b.classList.contains('b-'+(store.bg||'room')));});
   
-  ['landing','seller','investor','tipar'].forEach(v=>{const el=document.getElementById('p-'+v);if(el)el.classList.toggle('active',store.view===v);});
+  ['landing','seller','loan','investor','tipar'].forEach(v=>{const el=document.getElementById('p-'+v);if(el)el.classList.toggle('active',store.view===v);});
   const app=document.getElementById('app');
-  app.innerHTML=store.view==='seller'?Seller():store.view==='investor'?Investor():Tipar();
+  app.innerHTML=store.view==='seller'?Seller():store.view==='loan'?LoanApp():store.view==='investor'?Investor():Tipar();
 
 }
 
@@ -6274,21 +6459,39 @@ function Intake(){const s=store.intakeStep,d=store.draft;
         :`<button class="btn btn-ghost" onclick="iStep(${s-1})">${s===1?'Zpět na web':'Zpět'}</button><button class="btn btn-gold" onclick="iStep(${s+1})">${s===4?'Zobrazit výsledek':'Pokračovat'} ${icArr()}</button>`}</div>
     </div></div></div>`;}
 function fakeUpload(){store.draft.uploaded=true;render();toast('Soubory nahrány');}
-function submitProperty(){const d=store.draft;const est=estimate(d);const p=mkProp(d.district,d.type,d.m2,d.floor,d.condition,est,d.hours,d.addr||'(neuvedeno)');p.escrow=d.escrow;store.properties.unshift(p);store.myPropId=p.id;scheduleMockOffers(p);store.view='seller';store.nav='overview';window.scrollTo(0,0);render();toast('Nemovitost je v systému · sbíráme nabídky');}
+function submitProperty(){const d=store.draft;const est=estimate(d);const p=mkProp(d.district,d.type,d.m2,d.floor,d.condition,est,d.hours,d.addr||'(neuvedeno)');p.escrow=d.escrow;p.vetted=false;store.properties.unshift(p);store.myPropId=p.id;scheduleVetting(p);store.view='seller';store.nav='overview';window.scrollTo(0,0);render();toast('Nemovitost přijata · spouštíme právní prověření');}
+function scheduleVetting(p){setTimeout(()=>{if(p.status!=='active')return;p.vetted=true;scheduleMockOffers(p);if(store.view==='seller'){render();toast('Lead právně prověřen · teď ho vidí investoři');}},3200);}
 
 /* ===================== SHELL ===================== */
 function shell(role,inner){
   const navS=[['overview','Přehled',icGrid()],['property','Moje nemovitost',icHome()],['chat','Sofia',icChat()],['help','Otázky',icBulb()]];
-  const navI=[['flow','Tržiště',icGrid()],['mine','Moje nabídky',icCoins()],['won','Vyhrané',icKey()],['programs','Programy',icBolt()],['offmarket','Off-market',icEye()],['faq','Otázky',icBulb()]];
+  const navI=[['flow','Tržiště',icGrid()],['pujcky','Půjčky',icBank()],['mine','Moje nabídky',icCoins()],['won','Vyhrané',icKey()],['programs','Programy',icBolt()],['offmarket','Off-market',icEye()],['faq','Otázky',icBulb()]];
   const navT=[['tips','Moje tipy',icCoins()],['how','Jak to chodí',icBulb()]];
-  const navs=role==='seller'?navS:role==='investor'?navI:navT;
-  const act=role==='seller'?store.nav:role==='investor'?store.tab:store.tnav||'tips';
-  const setter=role==='seller'?'store.nav':role==='investor'?'store.tab':'store.tnav';
-  const user={seller:['VN','Vaše nemovitost','Prodávající'],investor:['PI','Petr Investor','Ověřený investor'],tipar:['JT','Jan Tipař','Tipař · partner']}[role];
+  const navL=[['overview','Moje žádost',icHome()],['help','Otázky',icBulb()]];
+  const navs=role==='seller'?navS:role==='investor'?navI:role==='loan'?navL:navT;
+  const act=role==='seller'?store.nav:role==='investor'?store.tab:role==='loan'?(store.lnNav||'overview'):store.tnav||'tips';
+  const setter=role==='seller'?'store.nav':role==='investor'?'store.tab':role==='loan'?'store.lnNav':'store.tnav';
+  const user={seller:['VN','Vaše nemovitost','Prodávající'],investor:['PI','Petr Investor','Ověřený investor'],tipar:['JT','Jan Tipař','Tipař · partner'],loan:['ŽP','Vaše žádost','Žadatel o půjčku']}[role];
   return `<div class="app bg-${store.bg||'room'}"><aside class="side"><div class="side-brand">${owl('hero',30)}<b>Kuply</b></div>
     ${navs.map(n=>`<div class="snav ${n[0]===act?'active':''}" onclick="${setter}='${n[0]}';render()">${n[2]}<span>${n[1]}</span></div>`).join('')}
+    ${role==='investor'?'':sofiaCard(role)}
     <div class="side-user"><div class="ua">${user[0]}</div><div><div class="un">${user[1]}</div><div class="ur">${user[2]}</div></div></div></aside>
     <main class="dmain">${inner}${dfoot()}</main></div>`;}
+function sofiaTip(role){
+  if(role==='loan')return lnGuide();
+  if(role==='seller'){const p=store.properties.find(x=>x.id===store.myPropId);
+    if(p&&p.status==='accepted')return 'Prodáno! Teď hlídám každý krok převodu za vás — sledujte postup v přehledu.';
+    if(p&&!p.vetted)return 'Právě prověřuji vaši nemovitost. Než to doběhne, klidně doplňte fotky — zvednou nabídky.';
+    if(p&&p.offers&&p.offers.length)return 'Nabídky chodí. Porovnejte si je nahoře — nejvyšší cena nemusí být vždy nejlepší volba.';
+    return 'Jakmile zadáte nemovitost, ukážu vám nabídky investorů v reálném čase.';}
+  if(role==='investor')return 'Prověřené leady — prodeje i půjčky. Filtrujte podle parametrů a pošlete nabídku.';
+  return 'Za přivedený tip, který skončí prodejem, vám náleží provize. Stav každého tipu sleduji za vás.';
+}
+function sofiaCard(role){const act=role==='seller'?"store.nav='chat'":role==='investor'?"store.tab='faq'":role==='loan'?"store.lnNav='help'":"store.tnav='how'";
+  return `<div class="side-sofi"><div class="ss-head">${owl('peek',28)}<span class="ss-name">Sofia</span><span class="ss-tag">AI</span></div>
+    <div class="ss-tip">${sofiaTip(role)}</div>
+    <button class="btn btn-gold ss-btn" onclick="${act};render()">${icChat()} Zeptat se</button></div>`;
+}
 function dfoot(){return `<div class="dfoot">
   <div style="display:flex;align-items:center;gap:13px"><div class="sp-av">MK</div><div><div class="sp-n">Marek Král · váš specialista</div><div class="sp-r">Smlouvy, úschova i technické dotazy</div></div></div>
   <span class="pill247"><span class="live-blink"></span>24/7 NA PŘÍJMU</span>
@@ -6307,14 +6510,15 @@ function Seller(){const p=store.properties.find(x=>x.id===store.myPropId);
   if(store.nav==='help')return shell('seller',SellerFaq());
   const best=p.offers[0];const pctBar=Math.max(2,Math.min(100,(p.deadline-now())/(p.hours*3600*1000)*100));
   const inner=`<div class="dtop"><div><div class="greet">Soukromý přehled · ${p.id}</div><h1>${p.type} · ${p.district.split('–')[1]?.trim()||p.district}</h1></div>
-      <div class="dtop-r"><span class="dchip"><span class="live-blink"></span> Sběr běží</span><div class="iconbtn" onclick="store.nav='chat';render()">${icChat()}<span class="nd"></span></div></div></div>
+      <div class="dtop-r">${p.vetted?'<span class="dchip"><span class="live-blink"></span> Sběr běží</span>':'<span class="dchip vet"><span class="live-blink"></span> Právní prověření</span>'}<div class="iconbtn" onclick="store.nav='chat';render()">${icChat()}<span class="nd"></span></div></div></div>
+    ${p.vetted?'':`<div class="vetbar"><div class="vb-ic">${icScale()}</div><div><div class="vb-t">Probíhá právní prověření vaší nemovitosti</div><div class="vb-d">Kontrolujeme list vlastnictví, katastr a případné zástavy či exekuce. Jakmile je čisto, nemovitost uvidí jen prověření investoři a začnou chodit nabídky. Obvykle pár minut.</div></div><div class="vb-pill">${icLock(14)} Bezpečně</div></div>`}
     <div class="dstats">
       <div class="dstat"><div class="dl">${icCoins(14)} Nabídek</div><div class="dv">${p.offers.length}</div><div class="dsub">${best?'aktivní soutěž':'čekáme na první'}</div></div>
       <div class="dstat"><div class="dl">${icArrUp()} Nejvyšší nabídka</div><div class="dv">${best?CZKm(best.amount):'—'}</div><div class="dsub">${best&&best.amount>p.estimate?'nad odhadem!':best?Math.round(best.amount/p.estimate*100)+' % odhadu':'—'}</div></div>
       <div class="dstat"><div class="dl">${icHome(14)} Odhad ceny</div><div class="dv">${CZKm(p.estimate)}</div><div class="dsub" style="color:var(--ink-50)">${p.m2} m² · ${p.floor}</div></div></div>
     <div class="dgrid"><div>
       <div class="dpanel"><div class="dpanel-h"><h3>Nabídky investorů</h3><span style="font-size:12px;color:var(--ink-50)">řazeno od nejvyšší</span></div>
-        <div class="dpanel-b">${p.offers.length?p.offers.map((o,i)=>doffer(o,i,p)).join(''):`<div class="empty">${icClock()}<div>Zatím žádné nabídky.<br>První obvykle dorazí během pár minut.</div></div>`}${p.offers.length>1?`<div style="margin-top:10px">${spark(p)}</div>`:''}</div></div>
+        <div class="dpanel-b">${p.offers.length?`${compareStrip(p)}${p.offers.length>1?'<div class="cmp-head" style="margin-top:16px">Všechny nabídky</div>':''}${p.offers.map((o,i)=>doffer(o,i,p)).join('')}${p.offers.length>1?`<div style="margin-top:10px">${spark(p)}</div>`:''}`:`<div class="empty">${icClock()}<div>Zatím žádné nabídky.<br>První obvykle dorazí během pár minut.</div></div>`}</div></div>
     </div><div>
       <div class="cdcard"><div class="cd-label">Zbývá do konce sběru</div><div class="cd-time" data-cd="${p.deadline}">${fmtLeft(p.deadline)}</div>
         <div class="cd-bar"><div class="cd-fill" data-cdbar="${p.deadline}|${p.hours}" style="width:${pctBar}%"></div></div>
@@ -6328,24 +6532,113 @@ function Seller(){const p=store.properties.find(x=>x.id===store.myPropId);
           <div class="dsem-row"><span>Úschova</span><span class="dsem-pill">${vtick()} ${p.escrow==='trinity'?'Trinity Bank':'Advokát'}</span></div></div></div></div>
       <button class="btn btn-ghost btn-block" style="margin-top:14px" onclick="store.nav='chat';render()">${icChat()} Zeptat se Sofie</button>
     </div></div>`;
-  return shell('seller',inner);
+  return shell('seller',inner)+(store.confirmOffer?convictionModal(p):'')+(store.confirmDelete?deleteModal():'');
 }
 function doffer(o,i,p){const pct=Math.round(o.amount/p.estimate*100);const over=o.amount>p.estimate;
   return `<div class="doffer ${i===0?'top':''}"><div class="oc-l"><div class="av">${o.investor.slice(0,2).toUpperCase()}</div>
     <div><div class="oi-name">${o.investor} ${o.verified?vtick():''}</div><div class="oi-meta">${i===0?'<span class="badge-top">Nejvyšší</span>':''}<span class="mtag ${o.finance==='Hotovost'?'cash':'mort'}">${o.finance}${o.finance==='Hypotéka'?' · Trinity':''}</span><span class="mtag">do ${o.days} dní</span><span>${over?'nad odhadem':pct+' % odhadu'}</span></div></div></div>
-    <div style="display:flex;align-items:center;gap:14px"><div class="oc-amt">${CZK(o.amount)}</div><button class="btn btn-gold btn-sm" onclick="acceptOffer('${o.id}')">Přijmout</button></div></div>`;}
+    <div style="display:flex;align-items:center;gap:14px"><div class="oc-amt">${CZK(o.amount)}</div><button class="btn btn-gold btn-sm" onclick="askAccept('${o.id}')">Přijmout</button></div></div>`;}
 function spark(p){const offs=[...p.offers].sort((a,b)=>a.ts-b.ts).map(o=>o.amount);if(offs.length<2)return'';const min=Math.min(...offs)*0.98,max=Math.max(...offs)*1.01,W=560,H=54;const pts=offs.map((v,i)=>[(i/(offs.length-1))*W,H-((v-min)/(max-min||1))*H]);const d='M '+pts.map(q=>q[0].toFixed(0)+' '+q[1].toFixed(0)).join(' L ');return `<svg class="spark" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none"><defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C9A876" stop-opacity=".35"/><stop offset="1" stop-color="#C9A876" stop-opacity="0"/></linearGradient></defs><path d="${d} L ${W} ${H} L 0 ${H} Z" fill="url(#sg)"/><path d="${d}" fill="none" stroke="#A0824F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>${pts.map(q=>`<circle cx="${q[0].toFixed(0)}" cy="${q[1].toFixed(0)}" r="3" fill="#A0824F"/>`).join('')}</svg>`;}
 function extendBy(h){const p=store.properties.find(x=>x.id===store.myPropId);p.deadline+=h*3600*1000;p.hours+=h;store.extendOpen=false;render();toast('Sběr prodloužen o '+h+' h');}
-function deleteSale(){if(!confirm('Opravdu smazat celý prodej? Tuto akci nelze vrátit. (Demo)'))return;const p=store.properties.find(x=>x.id===store.myPropId);if(p)p.status='deleted';store.myPropId=null;render();toast('Prodej smazán');}
-function acceptOffer(oid){const p=store.properties.find(x=>x.id===store.myPropId);const o=p.offers.find(x=>x.id===oid);if(!confirm('Přijmout nabídku '+CZK(o.amount)+' od '+o.investor+'?\n\nTím se zahájí proces převodu. (Demo)'))return;p.status='accepted';p.accepted=o.id;render();}
+function deleteSale(){store.confirmDelete=true;render();}
+function closeDelete(){store.confirmDelete=false;render();}
+function doDeleteSale(){const p=store.properties.find(x=>x.id===store.myPropId);if(p)p.status='deleted';store.confirmDelete=false;store.myPropId=null;render();toast('Prodej smazán');}
+function deleteModal(){return `<div class="modal-bg" onclick="if(event.target===this)closeDelete()"><div class="modal modal-conv">
+    <button class="modal-x" onclick="closeDelete()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="conv-top"><div class="conv-h">Opravdu smazat tento prodej?</div>
+      <div class="conv-sub">Nemovitost zmizí ze systému a investoři přijdou o přístup k ní i ke svým nabídkám. Tuto akci nelze vrátit — ale klidně ji můžete místo toho jen pozastavit a poradit se se Sofií.</div></div>
+    <div class="modal-c" style="padding-top:18px"><div class="conv-acts">
+      <button class="btn btn-ghost" onclick="closeDelete()">Ne, ponechat</button>
+      <button class="btn btn-danger" onclick="doDeleteSale()">${icTrash()} Ano, smazat</button></div></div></div></div>`;}
+function askAccept(oid){const p=store.properties.find(x=>x.id===store.myPropId);store.confirmOffer=oid;store.acceptEscrow=(p&&p.escrow)||'advokat';render();}
+function closeConfirm(){store.confirmOffer=null;render();}
+function acceptOffer(oid){const p=store.properties.find(x=>x.id===store.myPropId);const o=p.offers.find(x=>x.id===oid);if(!o)return;p.escrow=store.acceptEscrow||p.escrow;store.confirmOffer=null;p.status='accepted';p.accepted=o.id;p.dealStep=2;scheduleDealProgress(p);window.scrollTo(0,0);render();}
+function scheduleDealProgress(p){
+  setTimeout(()=>{if(p.status==='accepted'&&(p.dealStep||0)<3){p.dealStep=3;if(store.view==='seller')render();}},7000);
+  setTimeout(()=>{if(p.status==='accepted'&&(p.dealStep||0)<4){p.dealStep=4;if(store.view==='seller'){render();toast('Posun: zahájeno právní prověření');}}},15000);
+}
+
+/* ----- Strukturované porovnání: nejvyšší / nejrychlejší / nejjistější ----- */
+function compareStrip(p){
+  if(p.offers.length<2)return'';
+  const top=p.offers[0];
+  const fastest=[...p.offers].sort((a,b)=>a.days-b.days||b.amount-a.amount)[0];
+  const cash=p.offers.filter(o=>o.finance==='Hotovost').sort((a,b)=>b.amount-a.amount);
+  const safest=cash[0]||null;
+  const dominant=(fastest.id===top.id)&&(!safest||safest.id===top.id);
+  const cards=[];
+  cards.push(cmpCard('win',icArrUp(),'Nejvyšší cena',top,top.amount>p.estimate?`+${Math.round((top.amount/p.estimate-1)*100)} % nad odhadem`:`${Math.round(top.amount/p.estimate*100)} % odhadu`));
+  if(!dominant){
+    if(fastest.id!==top.id)cards.push(cmpCard('fast',icClock2(),'Nejrychlejší převod',fastest,`do ${fastest.days} dní · ${fastest.finance.toLowerCase()}`));
+    if(safest&&safest.id!==top.id&&safest.id!==fastest.id)cards.push(cmpCard('safe',icShield(16),'Nejjistější · hotovost',safest,'bez rizika financování'));
+  }
+  const head=dominant
+    ?`${icSpark()}Jedna nabídka vede ve všech ohledech`
+    :`${icSpark()}Vyberte podle toho, co je pro vás důležité`;
+  return `<div class="cmp"><div class="cmp-head">${head}</div><div class="cmp-grid">${cards.join('')}</div></div>`;
+}
+function cmpCard(kind,ico,label,o,sub){
+  return `<div class="cmp-card ${kind}">
+    <div class="cmp-lab"><span class="ico">${ico}</span>${label}</div>
+    <div><div class="cmp-val">${CZK(o.amount)}</div><div class="cmp-sub">${sub}</div></div>
+    <div class="cmp-who">${o.investor}${o.verified?vtick():''}</div>
+    <button class="btn btn-gold btn-sm cmp-pick" onclick="askAccept('${o.id}')">Vybrat tuto</button>
+  </div>`;
+}
+/* ----- Conviction modál: klidné, závazné přijetí (žádný confirm() box) ----- */
+function convRow(k,v){return `<div class="dsem-row"><span>${k}</span><span style="color:var(--ink);font-weight:600">${v}</span></div>`;}
+function convictionModal(p){
+  const o=p.offers.find(x=>x.id===store.confirmOffer);if(!o)return'';
+  const over=o.amount>p.estimate;const pct=Math.round((o.amount/p.estimate-1)*100);
+  const isTop=p.offers[0]&&p.offers[0].id===o.id;const esc=store.acceptEscrow||p.escrow||'advokat';
+  return `<div class="modal-bg" onclick="if(event.target===this)closeConfirm()"><div class="modal modal-conv">
+    <button class="modal-x" onclick="closeConfirm()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="conv-top"><div class="owl-float" style="display:inline-block">${owl('happy',86)}</div>
+      <div class="conv-h">${isTop?'Přijímáte nejvyšší nabídku':'Přijímáte vybranou nabídku'}</div>
+      <div class="conv-sub">Projděte si podmínky v klidu. Rozhodujete vy — přijetí je závazné až po podpisu smlouvy, do té doby vás nic neváže.</div></div>
+    <div class="modal-c" style="padding-top:16px">
+      <div class="conv-amt">${CZK(o.amount)}</div>
+      <div style="text-align:center"><span class="conv-delta ${over?'':'mut'}">${over?`▲ +${pct} % nad odhadem`:`${Math.round(o.amount/p.estimate*100)} % odhadu`}</span></div>
+      <div class="conv-sum">
+        ${convRow('Investor',`${o.investor} ${o.verified?vtick():''}`)}
+        ${convRow('Forma úhrady',`<span class="mtag ${o.finance==='Hotovost'?'cash':'mort'}">${o.finance}${o.finance==='Hypotéka'?' · Trinity':''}</span>`)}
+        ${convRow('Dokončení převodu','do '+o.days+' dní')}
+        ${convRow('Poplatek pro vás','<b style="color:var(--positive)">0 Kč</b>')}
+      </div>
+      <div class="conv-escrow"><div class="ce-label">Kdo pohlídá kupní cenu? Vyberte úschovu:</div>
+        <div class="ce-opts">
+          <button class="ce-opt ${esc==='advokat'?'on':''}" onclick="store.acceptEscrow='advokat';render()">${icScale()}<div><b>Advokátní úschova</b><span>Partnerská advokátní kancelář</span></div></button>
+          <button class="ce-opt ${esc==='trinity'?'on':''}" onclick="store.acceptEscrow='trinity';render()">${icBank()}<div><b>Trinity Bank</b><span>Bankovní úschova, regulováno</span></div></button>
+        </div></div>
+      <div class="conv-note">${icLock(16)}<div>Po přijetí připravíme kupní smlouvu a zajistíme nezávislou úschovu. Peníze nikdy nejdou přes Kuply. Identitu investora uvidíte až ve smlouvě.</div></div>
+      <div class="conv-acts"><button class="btn btn-ghost" onclick="closeConfirm()">Ještě se rozmyslím</button><button class="btn btn-gold" onclick="acceptOffer('${o.id}')">Závazně přijmout ${icArr()}</button></div>
+    </div></div></div>`;
+}
+/* ----- Průběh převodu: 10 kroků z pohledu prodávajícího ----- */
+const DEAL_STEPS=[
+  ['Nabídka přijata','Vybral/a jste nejlepší nabídku — gratulujeme.',''],
+  ['Příprava kupní smlouvy','Advokát nebo Trinity Bank teď chystá smlouvu na míru.','k'],
+  ['Právní prověření','Kontrola listu vlastnictví, katastru a případných břemen.','kf'],
+  ['Podpis smlouvy','Podepíšete vy i investor — u notáře ve vašem okolí.',''],
+  ['Kupní cena do úschovy','Investor skládá celou částku do nezávislé úschovy.',''],
+  ['Návrh na vklad do katastru','Podáme za vás návrh na zápis nového vlastníka.','k'],
+  ['Zápis vlastnictví','Katastrální úřad provádí převod (obvykle ~20 dní).','k'],
+  ['Uvolnění peněz','Po zápisu se kupní cena uvolní na váš účet.',''],
+  ['Předání nemovitosti','Předáte klíče a odečtete stav měřidel.',''],
+  ['Hotovo — prodáno','Vše vyřízeno. Zůstáváme vám k ruce i dál.','']
+];
+function dealTimeline(p){const cur=p.dealStep||2;
+  return `<div class="tl">${DEAL_STEPS.map((s,i)=>{const n=i+1;const st=n<cur?'done':n===cur?'active':'wait';
+    const tags=[];if(st==='active')tags.push('<span class="tl-tag now">Probíhá</span>');
+    if(st!=='done'){if(s[2].includes('f'))tags.push('<span class="tl-tag fast">⚡ Kuply rychle</span>');else if(s[2].includes('k'))tags.push('<span class="tl-tag k">Zařídíme my</span>');}
+    return `<div class="tl-step ${st}"><div class="tl-rail"><div class="tl-node">${st==='done'?vtick():n}</div><div class="tl-line"></div></div>
+      <div class="tl-body"><div class="tl-t">${s[0]} ${tags.join('')}</div><div class="tl-d">${s[1]}</div></div></div>`;}).join('')}</div>`;
+}
 function SellerSuccess(p){const o=p.offers.find(x=>x.id===p.accepted);return `<div style="max-width:760px;margin:0 auto">
   <div style="text-align:center"><div class="owl-float" style="display:inline-block">${owl('wow',138)}</div>
     <h1 class="dsp" style="font-size:34px;font-weight:700;letter-spacing:-.03em;margin:6px 0 12px">Gratulujeme, prodáno!</h1>
     <p style="color:var(--ink-70);font-size:16px;max-width:520px;margin:0 auto 22px">Přijali jste nabídku <b style="color:var(--gold-d)">${CZK(o.amount)}</b> od ${o.investor} (${o.finance.toLowerCase()}, do ${o.days} dní). Úschova: <b>${p.escrow==='trinity'?'Trinity Bank':'advokátní kancelář'}</b>. Teď už se postaráme my.</p></div>
-  <div class="dpanel" style="margin-bottom:22px"><div class="dpanel-b" style="padding:18px 22px"><div class="dsem">
-    <div class="dsem-row"><span>1 · Příprava smlouvy</span><span class="dsem-pill warn">${icClock2()} Probíhá</span></div>
-    <div class="dsem-row"><span>2 · Úschova kupní ceny</span><span class="dsem-pill mut">Čeká</span></div>
-    <div class="dsem-row"><span>3 · Podpis a převod v katastru</span><span class="dsem-pill mut">Čeká</span></div></div></div></div>
+  <div class="dpanel" style="margin-bottom:22px"><div class="dpanel-h"><h3>Co bude dál — krok za krokem</h3><span style="font-size:12px;color:var(--ink-50)">o každém posunu vás dáme vědět</span></div><div class="dpanel-b" style="padding:20px 22px">${dealTimeline(p)}</div></div>
   <div class="upsell"><div><div class="us-eyebrow">Zůstaňme v kontaktu</div><h3 class="dsp" style="font-size:23px;font-weight:700;margin:4px 0 8px">Založte si profil Kuply</h3>
     <p style="font-size:14px;color:rgba(255,253,247,.86);max-width:30em">Smlouvy, doklady a historie prodeje na jednom místě. A až budete zase něco řešit, navážeme tam, kde jsme skončili.</p>
     <button class="btn btn-gold" style="margin-top:16px" onclick="toast('Profil založen — díky! (demo)')">Založit profil ${icArr()}</button></div>
@@ -6379,13 +6672,15 @@ function cmsgHtml(m){return m.r==='sof'?`<div class="cmsg sof"><div class="who">
 function sofiaAsk(q){if(!store.chat.length)store.chat.push({r:'sof',t:'Ahoj! Jsem Sofia. Zeptejte se na cokoli k prodeji — nebo klikněte na jednu z otázek dole.'});store.chat.push({r:'usr',t:q});store.chat.push({r:'sof',t:SOFIA_QA[q]||'Dobrá otázka — na tu vám odpoví náš tým, ozveme se.'});render();const c=document.getElementById('chatMsgs');if(c)c.scrollTop=c.scrollHeight;}
 
 /* ===================== INVESTOR ===================== */
-function Investor(){if(store.openDeal)return InvestorDetail();
+function Investor(){if(store.openLoan)return InvestorLoanDetail();
+  if(store.tab==='pujcky')return shell('investor',InvestorLoans());
+  if(store.openDeal)return InvestorDetail();
   if(store.tab==='won'&&store.openWon)return InvestorWonDetail();
   if(store.tab==='won')return shell('investor',InvestorWonInner());
   if(store.tab==='programs')return shell('investor',InvestorPrograms());
   if(store.tab==='offmarket')return shell('investor',InvestorOffmarket());
   if(store.tab==='faq')return shell('investor',InvestorFaq());
-  const active=store.properties.filter(p=>p.status==='active');const mine=store.properties.filter(p=>p.offers.some(o=>o.mine));
+  const active=store.properties.filter(p=>p.status==='active'&&p.vetted===true);const mine=store.properties.filter(p=>p.offers.some(o=>o.mine));
   const list=store.tab==='mine'?mine:active;
   const inner=`<div class="dtop"><div><div class="greet">Investorský přístup · ověřeno ${vtick()}</div><h1>Dobrý den, Petře.</h1></div>
       <div class="dtop-r"><div class="search">${icSearch()}<span>Hledat nemovitost…</span></div><div class="iconbtn">${icBell()}<span class="nd"></span></div></div></div>
@@ -6393,24 +6688,19 @@ function Investor(){if(store.openDeal)return InvestorDetail();
       <div class="dstat"><div class="dl">${icGrid()} Aktivní příležitosti</div><div class="dv">${active.length}</div><div class="dsub">nové každý den</div></div>
       <div class="dstat"><div class="dl">${icCoins(14)} Moje nabídky</div><div class="dv">${mine.length}</div><div class="dsub" style="color:var(--ink-50)">skryté ostatním</div></div>
       <div class="dstat"><div class="dl">${icShield()} Limit nabídek</div><div class="dv">30 mil.</div><div class="dsub" style="color:var(--ink-50)">na transakci</div></div></div>
-    <div class="tabs">
-      <div class="tab ${store.tab==='flow'?'active':''}" onclick="store.tab='flow';render()">Tržiště (${active.length})</div>
-      <div class="tab ${store.tab==='mine'?'active':''}" onclick="store.tab='mine';render()">Moje nabídky (${mine.length})</div>
-      <div class="tab ${store.tab==='won'?'active':''}" onclick="store.openWon=null;store.tab='won';render()">Vyhrané (${store.won.length})</div>
-      <div class="tab ${store.tab==='programs'?'active':''}" onclick="store.tab='programs';render()">Doprovodné programy</div>
-      <div class="tab ${store.tab==='offmarket'?'active':''}" onclick="store.tab='offmarket';render()">Off-market</div>
-      <div class="tab ${store.tab==='faq'?'active':''}" onclick="store.tab='faq';render()">Otázky</div></div>
+    ${investorTabs(store.tab)}
     ${list.length?`<div class="deal-grid">${list.map(dealCard).join('')}</div>`:`<div class="empty">${icClock()}<div>Žádné nabídky.<br>Zkuste zadat nemovitost na webu a vrátit se sem.</div></div>`}`;
   return shell('investor',inner);
 }
 function dealCard(p){const left=fmtLeftShort(p.deadline);const urgent=(p.deadline-now())<6*3600*1000;const my=p.offers.find(o=>o.mine);const {g,y}=gradeProp(p);
   return `<div class="deal" onclick="openDeal('${p.id}')"><div class="deal-img"><img class="dimg" src="${PH[(p.m2+p.offers.length)%3]}" alt=""><div class="dimg-grad"></div><span class="rating"><span class="g">${g}</span><span class="yld">${y.toFixed(1).replace('.',',')}%</span></span><span class="img-chip">${ic3d()} 3D prohlídka</span><span class="deal-time ${urgent?'urgent':''}">${left}</span></div>
     <div class="deal-b"><div class="deal-loc">${p.type} · ${p.district.split('–')[1]?.trim()||p.district}</div><div class="deal-spec">${p.m2} m² · ${p.floor} · ${p.condition}</div>
+      <div class="deal-vfy">${vtick()} Právně prověřeno · LV bez závad</div>
       <div class="deal-row"><div class="deal-est"><div class="del">Odhad ceny</div><div class="dev">${CZKm(p.estimate)}</div><div class="del" style="margin-top:3px">${new Intl.NumberFormat('cs-CZ').format(Math.round(p.estimate/p.m2))} Kč/m²</div></div>
         <div class="deal-offers">${p.offers.length} nabídek<br>${my?`<span style="color:var(--gold-d);font-weight:600">vaše: ${CZKm(my.amount)}</span>`:'<span style="color:var(--positive);font-weight:600">licitujte naslepo</span>'}</div></div></div></div>`;}
 function openDeal(id){store.openDeal=id;store.bidFinance='cash';store.bidDays=14;render();}
 function closeDeal(){store.openDeal=null;render();}
-function InvestorDetail(){const p=store.properties.find(x=>x.id===store.openDeal);const my=p.offers.find(o=>o.mine);const {g,y}=gradeProp(p);const active=store.properties.filter(x=>x.status==='active');
+function InvestorDetail(){const p=store.properties.find(x=>x.id===store.openDeal);const my=p.offers.find(o=>o.mine);const {g,y}=gradeProp(p);const active=store.properties.filter(x=>x.status==='active'&&x.vetted===true);
   const behind=`<div class="dtop"><div><div class="greet">Investorský přístup</div><h1>Dobrý den, Petře.</h1></div></div><div class="deal-grid">${active.map(dealCard).join('')}</div>`;
   const mort=store.bidFinance==='mort';
   const perM2=Math.round(p.estimate/p.m2);
@@ -6438,7 +6728,8 @@ function InvestorDetail(){const p=store.properties.find(x=>x.id===store.openDeal
         </div>
         <div>
           <div class="fin-hero"><div class="fh-row"><span>Odhad ceny</span><b>${CZK(p.estimate)}</b></div><div class="fh-row"><span>Cena za m²</span><b>${new Intl.NumberFormat('cs-CZ').format(perM2)} Kč</b></div><div class="fh-row"><span>Odhad tržního nájmu</span><b>${CZK(rent)} / měs.</b></div><div class="fh-big"><span>Odhad. hrubý výnos</span><b>${y.toFixed(1).replace('.',',')} %</b></div></div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px">
+          <div class="vfy-banner" style="margin-top:14px"><div class="vb2-ic">${icShield(18)}</div><div><b>Právně prověřeno Kuply</b><span>List vlastnictví, katastr i exekuce zkontrolovány ještě před zveřejněním. K investorům jdou jen čisté leady.</span></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
             ${semCard('Zástavní právo','Ne')}${semCard('Exekuce','Ne')}${semCard('Věcná břemena','Ne')}
             <div class="dsem-row" style="background:var(--p);border:1px solid var(--brd);border-radius:12px;padding:12px 14px"><span style="font-size:13px">List vlastnictví</span><span class="dsem-pill warn">Po akceptaci</span></div></div>
           <div class="bidbox"><label>${my?'Vaše nabídka — můžete navýšit':'Vaše maximální nabídka'}</label>
@@ -6469,7 +6760,7 @@ function InvestorOffmarket(){return `<div class="dtop"><div><div class="greet">O
     <div class="row2"><div class="field"><label>Lokalita</label><select><option>Praha 1 – Staré Město</option><option>Praha 2 – Vinohrady</option><option>Brno – střed</option></select></div>
       <div class="field"><label>Dispozice</label><select><option>2+kk</option><option>3+kk</option><option>4+kk</option><option>Komerční</option></select></div></div>
     <div class="row2"><div class="field"><label>Požadovaná cena (Kč)</label><input placeholder="9 500 000"></div><div class="field"><label>Plocha (m²)</label><input placeholder="78"></div></div>
-    <button class="btn btn-gold" onclick="toast('Off-market nabídka odeslána prověřeným investorům (demo)')">Nabídnout diskrétně ${icArr()}</button>
+    <button class="btn btn-pri btn-lg btn-block" style="margin-top:6px" onclick="toast('Off-market nabídka odeslána prověřeným investorům (demo)')">Nabídnout diskrétně prověřeným investorům ${icArr()}</button>
   </div></div>`;}
 function InvestorFaq(){return `<div class="dtop"><div><div class="greet">Nápověda</div><h1>Otázky investorů</h1></div></div><div class="faq">${IFAQS.map(faqItem).join('')}</div>`;}
 
@@ -6578,6 +6869,219 @@ function icChat(){return `<svg width="19" height="19" viewBox="0 0 24 24" fill="
 function icScale(){return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M7 21h10M5 7h14M5 7l-2.5 6a3 3 0 0 0 5 0L5 7Zm14 0-2.5 6a3 3 0 0 0 5 0L19 7Z"/><path d="M12 3 5 7M12 3l7 4"/></svg>`}
 function icBank(){return `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10 12 4l9 6"/><path d="M5 10v8M9.5 10v8M14.5 10v8M19 10v8"/><path d="M3 21h18"/></svg>`}
 
+/* ===================== PŮJČKY (loan marketplace) ===================== */
+const LNTYPES=['Byt 2+kk','Byt 3+kk','Byt 4+kk','Rodinný dům','Komerční prostor'];
+const LNCOND=['Novostavba/po rekonstrukci','Dobrý stav','Původní stav'];
+const LN_INV=['Vltava Capital','BytFond a.s.','Reinvest CZ','Trinity Privátní','Domov Invest'];
+function lnLtv(a,v){return v>0?a/v*100:0;}
+function lnCol(l){return l<=60?'var(--positive)':l<=80?'var(--gold-d)':'var(--rust)';}
+function lnMonthly(P,rate,years){const r=rate/100/12,n=years*12;if(r<=0)return P/n;return P*r/(1-Math.pow(1+r,-n));}
+function lnCalc(o){const m=lnMonthly(o.amount,o.rate,o.term),fee=o.amount*(o.fee||0)/100,total=m*o.term*12+fee,over=total-o.amount,rpsn=(Math.pow(total/o.amount,1/o.term)-1)*100;return{m,fee,total,over,rpsn};}
+function lnEst(d){return estimate({district:d.district,m2:d.m2,condition:d.condition});}
+function lnPct(n){return n.toFixed(1).replace('.',',')+' %';}
+function lnY(n){return n===1?'rok':n<5?'roky':'let';}
+
+/* ---- Sofia pro žadatele (ujišťuje); investor dostává minimum jinde ---- */
+function lnGuide(){const L=store.ln,d=L.draft,l=lnLtv(d.amount,d.value);
+  if(L.accepted)return 'Hotovo. Smlouvu a zástavu připraví advokát — o každém kroku dám vědět.';
+  if(L.lead){return L.offers.length?'Porovnejte <b>RPSN</b>, ne jen úrok — poplatky se počítají. Nejvýhodnější máte nahoře.':'Žádost je v systému. Brzy dorazí první nezávazné nabídky. Dokud nepřijmete, nic neplatíte.';}
+  if(L.step===0)return 'Zástava je jen jištění — <b>nemovitost zůstává vaše</b>.';
+  if(L.step===1)return 'Hodnotu spočítám hned z parametrů. Máte-li <b>znalecký posudek</b>, nahrajte ho — zpřesní LTV.';
+  if(L.step===2){if(l<=60)return `<b>LTV ${Math.round(l)} %</b> — bezpečné, čekejte nízký úrok.`;if(l<=80)return `<b>LTV ${Math.round(l)} %</b> — v normě.`;return `<b>LTV ${Math.round(l)} %</b> nad 80 % je <b>rizikové</b> — zvažte nižší částku.`;}
+  return 'Jméno a adresu uvidí investor až <b>po přijetí</b> nabídky.';
+}
+
+function LoanApp(){const L=store.ln;
+  if(L.accepted)return shell('loan',LoanSuccess());
+  if(L.lead){if(store.lnNav==='help')return shell('loan',SellerFaq());return shell('loan',LoanDash())+(L.confirm?lnConviction():'');}
+  return LoanFlow();
+}
+
+/* ---- vícekrokový lead (žádost) ---- */
+function lnSet(k,v){store.ln.draft[k]=v;render();}
+function lnStep(n){if(n<0){go('landing');return;}const L=store.ln;if(L.draft.valMode==='auto')L.draft.value=lnEst(L.draft);L.step=Math.min(3,n);window.scrollTo(0,0);render();}
+function lnOnDist(v){store.ln.draft.district=v;if(store.ln.draft.valMode==='auto')store.ln.draft.value=lnEst(store.ln.draft);render();}
+function lnOnM2(v){store.ln.draft.m2=+v||0;if(store.ln.draft.valMode==='auto')store.ln.draft.value=lnEst(store.ln.draft);}
+function lnValMode(m){store.ln.draft.valMode=m;if(m==='auto')store.ln.draft.value=lnEst(store.ln.draft);render();}
+function lnUpload(){store.ln.draft.posudek=true;render();toast('Znalecký posudek nahrán');}
+function lnOnAmount(v){store.ln.draft.amount=+v||0;lnRefresh();}
+function lnContactOk(){const d=store.ln.draft;return /\S+@\S+\.\S+/.test(d.email)&&d.phone.replace(/[^\d]/g,'').length>=9;}
+function lnOnContact(k,v){store.ln.draft[k]=v;const b=document.getElementById('lnSubmit');if(b)b.disabled=!lnContactOk();}
+function lnRefresh(){const d=store.ln.draft,l=lnLtv(d.amount,d.value),col=lnCol(l);
+  const p=document.getElementById('ln-ltvpct'),f=document.getElementById('ln-ltvfill'),n=document.getElementById('ln-ltvnote'),g=document.getElementById('ln-guide');
+  if(p){p.textContent=Math.round(l)+' %';p.style.color=col;}
+  if(f){f.style.width=Math.min(100,l)+'%';f.style.background=col;}
+  if(n){n.style.color=col;n.textContent=l<=60?'Bezpečné — nízký úrok a hodně nabídek.':l<=80?'V normě — většina investorů půjčuje sem.':'Vysoké — počítejte s opatrnějšími, dražšími nabídkami.';}
+  if(g)g.innerHTML=lnGuide();
+}
+function LoanFlow(){const L=store.ln,d=L.draft,s=L.step;
+  const prog=[0,1,2,3].map(i=>`<i class="lnp ${i<=s?'on':''}"></i>`).join('');
+  let body='';
+  if(s===0){body=`<div class="lnstep"><h2>Vaše nemovitost</h2><p class="sub">Co dáte do zástavy. Zůstává vaše — slouží jen jako jištění půjčky.</p>
+    ${d.propNote?`<div class="lnguide" style="margin:0 0 14px"><span class="so">${owl('peek',22)}</span><span>Z vašeho dotazu: <b>${d.propNote}</b> — zkontrolujte a doplňte parametry níže.</span></div>`:''}
+    <div class="row2"><div class="field" style="margin-bottom:14px"><label>Typ</label><select onchange="lnSet('type',this.value)">${LNTYPES.map(t=>`<option ${t===d.type?'selected':''}>${t}</option>`).join('')}</select></div>
+      <div class="field" style="margin-bottom:14px"><label>Lokalita</label><select onchange="lnOnDist(this.value)">${DLIST.map(t=>`<option ${t===d.district?'selected':''}>${t}</option>`).join('')}</select></div></div>
+    <div class="row2"><div class="field" style="margin-bottom:0"><label>Plocha (m²)</label><input type="number" value="${d.m2}" oninput="lnOnM2(this.value)"></div>
+      <div class="field" style="margin-bottom:0"><label>Stav</label><select onchange="lnSet('condition',this.value)">${LNCOND.map(c=>`<option ${c===d.condition?'selected':''}>${c}</option>`).join('')}</select></div></div></div>`;}
+  else if(s===1){const vm=d.valMode||'auto',est=lnEst(d);
+    body=`<div class="lnstep"><h2>Hodnota nemovitosti</h2><p class="sub">Určuje, kolik vám půjčíme a slouží pro zástavu — proto se nepíše „od oka". Vyberte, jak ji doložíte.</p>
+    <div class="valopts">
+      <button class="valopt ${vm==='auto'?'on':''}" onclick="lnValMode('auto')"><span class="vi">${icSpark()}</span><b>Odhad Kuply</b><span>Spočítáme hned z parametrů.</span></button>
+      <button class="valopt ${vm==='posudek'?'on':''}" onclick="lnValMode('posudek')"><span class="vi">${icScroll()}</span><b>Znalecký posudek</b><span>Mám odhad od znalce — nahraju ho.</span></button></div>
+    ${vm==='auto'
+      ? `<div class="lngauge"><div class="lngauge-top"><span style="font-size:13px;font-weight:600;color:var(--ink-70)">Odhad Kuply</span><b>${CZK(est)}</b></div>
+          <div style="font-size:12.5px;color:var(--ink-60)">${d.type} · ${d.district} · ${d.m2} m²</div>
+          <div class="lnnote" style="color:var(--ink-60);font-weight:500">Orientační. Pro závaznou nabídku zajistíme znalecký posudek (v ceně).</div></div>`
+      : `<div class="lnup ${d.posudek?'done':''}" onclick="lnUpload()"><div style="margin-bottom:8px">${d.posudek?vtick():icUpload()}</div><b style="font-size:14.5px">${d.posudek?'Posudek nahrán':'Nahrát znalecký posudek'}</b><div style="font-size:12.5px;color:var(--ink-60);margin-top:3px">${d.posudek?'Hodnotu doplňte níže dle posudku':'PDF od soudního znalce'}</div></div>
+        ${d.posudek?`<div class="field" style="margin:14px 0 0"><label>Hodnota dle posudku (Kč)</label><input type="number" value="${d.value}" oninput="store.ln.draft.value=+this.value||0"></div>`:''}`}</div>`;}
+  else if(s===2){const l=lnLtv(d.amount,d.value),col=lnCol(l);
+    body=`<div class="lnstep"><h2>Kolik a na jak dlouho</h2><p class="sub">Kolik chcete půjčit a na jakou dobu. LTV počítám živě.</p>
+    <div class="field"><label>Kolik chci půjčit (Kč)</label><input type="number" value="${d.amount}" oninput="lnOnAmount(this.value)"></div>
+    <div class="field" style="margin-bottom:0"><label>Doba splatnosti</label><div class="chipset">${[1,3,5,10,15].map(y=>`<button class="chip ${y===d.term?'on':''}" onclick="lnSet('term',${y})">${y} ${y===1?'rok':y<5?'roky':'let'}</button>`).join('')}</div></div>
+    <div class="lngauge"><div class="lngauge-top"><span style="font-size:13px;font-weight:600;color:var(--ink-70)">Vaše LTV</span><b id="ln-ltvpct" style="color:${col}">${Math.round(l)} %</b></div>
+      <div class="lnbar"><i id="ln-ltvfill" style="width:${Math.min(100,l)}%;background:${col}"></i></div>
+      <div class="lnzones"><span>0 %</span><span>bezpečné 60 %</span><span>strop 80 %</span><span>100 %</span></div>
+      <div class="lnnote" id="ln-ltvnote" style="color:${col}">${l<=60?'Bezpečné — nízký úrok a hodně nabídek.':l<=80?'V normě — většina investorů půjčuje sem.':'Vysoké — počítejte s opatrnějšími, dražšími nabídkami.'}</div></div></div>`;}
+  else{body=`<div class="lnstep"><h2>Kam pošleme váš dashboard?</h2><p class="sub">Na e-mail dorazí odkaz na váš unikátní přehled s nabídkami. Bez hesla, bez spamu.</p>
+    <div class="field"><label>Jméno a příjmení</label><input value="${d.name}" placeholder="Jan Novák" oninput="store.ln.draft.name=this.value"></div>
+    <div class="field"><label>E-mail</label><input type="email" value="${d.email}" placeholder="vy@email.cz" oninput="lnOnContact('email',this.value)"></div>
+    <div class="field" style="margin-bottom:0"><label>Telefon</label><input type="tel" value="${d.phone}" placeholder="+420 777 123 456" oninput="lnOnContact('phone',this.value)"></div>
+    <div class="dnote" style="margin-top:14px;display:flex;gap:10px;align-items:flex-start">${icLock(16)}<div>Na e-mail pošleme odkaz na váš <b>unikátní dashboard</b>, nabídky a další kroky. Šifrováno · GDPR.</div></div></div>`;}
+  const last=s===3;
+  const nav=`<div class="lnnav"><button class="btn btn-ghost" onclick="lnStep(${s-1})">${s===0?'Zpět na web':'Zpět'}</button>
+    ${last?`<button class="btn btn-gold" id="lnSubmit" ${lnContactOk()?'':'disabled'} onclick="submitLoanLead()">Odeslat žádost ${icArr()}</button>`
+      :`<button class="btn btn-gold" onclick="lnStep(${s+1})">Pokračovat ${icArr()}</button>`}</div>`;
+  return `<div class="lnflow"><div class="lnflow-card">
+    <div class="lnflow-brand">${owl('hero',26)}<b>Kuply</b><span>· Žádost o půjčku · krok ${s+1}/4</span></div>
+    <div class="lnprog">${prog}</div>${body}
+    <div class="lnguide"><span class="so">${owl('peek',22)}</span><span id="ln-guide">${lnGuide()}</span></div>${nav}
+    <div class="lntrust"><span>${icShield()} Nemovitost zůstává vaše</span><span>${icScale()} Smlouva přes advokáta</span><span>${icLock()} Bez závazku, dokud nepřijmete</span></div></div></div>`;
+}
+function submitLoanLead(){const d=store.ln.draft;
+  store.ln.lead={id:'PJ-'+uid(),type:d.type,district:d.district,m2:d.m2,condition:d.condition,value:d.value,amount:d.amount,term:d.term,ltv:lnLtv(d.amount,d.value),posudek:d.posudek,vetted:false,ts:now()};
+  store.ln.offers=[];store.lnNav='overview';go('loan');toast('Žádost přijata · spouštíme prověření');
+  setTimeout(()=>{const L=store.ln;if(!L.lead)return;L.lead.vetted=true;if(store.view==='loan')render();toast('Lead prověřen · investoři ho teď vidí');scheduleLoanOffers();},2600);
+}
+function scheduleLoanOffers(){const base=store.ln.lead;const br=base.ltv<=50?5.6:base.ltv<=70?7.0:base.ltv<=80?8.6:10.5;
+  [3500,8000,14000].forEach((ms,i)=>setTimeout(()=>{const L=store.ln;if(!L.lead)return;
+    const rate=+(br+(Math.random()*1.6-0.7)+i*0.1).toFixed(1);
+    const amt=i===0?base.amount:Math.min(base.amount,Math.round(base.value*(base.ltv>80?0.72:0.8)/10000)*10000);
+    pushLoanOffer({investor:LN_INV[Math.floor(Math.random()*LN_INV.length)],rate,amount:amt,term:base.term,fee:+(0.5+Math.random()*1.5).toFixed(1)});
+    if(store.view==='loan')toast('Nová nabídka půjčky');},ms));}
+function pushLoanOffer(o){o.id=uid();const c=lnCalc(o);o.monthly=c.m;o.rpsn=c.rpsn;o.total=c.total;o.over=c.over;store.ln.offers.push(o);store.ln.offers.sort((a,b)=>a.rpsn-b.rpsn);if(store.view==='loan')render();}
+
+/* ---- žadatelův dashboard (kvalita Seller) ---- */
+function LoanDash(){const L=store.ln,l=L.lead,offs=L.offers,best=offs[0],col=lnCol(l.ltv);
+  const lowRate=offs.length?offs.reduce((a,b)=>b.rate<a.rate?b:a):null;
+  let cmp='';
+  if(offs.length>=2){const cards=[lnCmpCard('win',icArrUp(),'Nejvýhodnější celkem',best,`RPSN ${lnPct(best.rpsn)} · přeplatek ${CZKm(best.over)}`)];
+    if(lowRate&&lowRate.id!==best.id)cards.push(lnCmpCard('cheap',icCoins(14),'Nejnižší úrok',lowRate,`úrok ${lnPct(lowRate.rate)} · RPSN ${lnPct(lowRate.rpsn)}`));
+    cmp=`<div class="dpanel" style="margin-top:18px"><div class="dpanel-h"><h3>Doporučení</h3><span style="font-size:12px;color:var(--ink-50)">řazeno dle RPSN</span></div><div class="dpanel-b"><div class="cmp-grid">${cards.join('')}</div></div></div>`;}
+  return `<div class="dtop"><div><div class="greet">Žádost o půjčku · ${l.id}</div><h1>${l.type} · ${l.district.split('–')[1]?.trim()||l.district}</h1></div>
+      <div class="dtop-r">${l.vetted?'<span class="dchip"><span class="live-blink"></span> Sbírám nabídky</span>':'<span class="dchip vet"><span class="live-blink"></span> Právní prověření</span>'}</div></div>
+    ${l.vetted?'':`<div class="vetbar"><div class="vb-ic">${icScale()}</div><div><div class="vb-t">Probíhá prověření vaší žádosti</div><div class="vb-d">Kontrolujeme nemovitost a zástavu. Jakmile je čisto, uvidí ji prověření investoři a začnou chodit nabídky.</div></div><div class="vb-pill">${icLock(14)} Bezpečně</div></div>`}
+    <div class="dstats">
+      <div class="dstat"><div class="dl">${icCoins(14)} Chci půjčit</div><div class="dv">${CZKm(l.amount)}</div><div class="dsub">na ${l.term} ${lnY(l.term)}</div></div>
+      <div class="dstat"><div class="dl">${icShield(14)} LTV</div><div class="dv" style="color:${col}">${Math.round(l.ltv)} %</div><div class="dsub">hodnota ${CZKm(l.value)}</div></div>
+      <div class="dstat"><div class="dl">${icArrUp()} Nabídek</div><div class="dv">${offs.length}</div><div class="dsub">${best?'nejlepší RPSN '+lnPct(best.rpsn):'čekám na první'}</div></div></div>
+    ${cmp}
+    <div class="dpanel" style="margin-top:18px"><div class="dpanel-h"><h3>Nabídky půjček</h3><span style="font-size:12px;color:var(--ink-50)">${offs.length?'řazeno od nejvýhodnější':''}</span></div>
+      <div class="dpanel-b">${offs.length?offs.map((o,i)=>lnOfferRow(o,i)).join(''):`<div class="empty">${icClock()}<div>${l.vetted?'Zatím žádné nabídky.<br>První obvykle dorazí během pár minut.':'Probíhá právní prověření.'}</div></div>`}</div></div>`;
+}
+function lnCmpCard(kind,ico,label,o,sub){return `<div class="cmp-card ${kind==='win'?'win':'cheap'}"><div class="cmp-lab"><span class="ico">${ico}</span>${label}</div>
+  <div><div class="cmp-val">${lnPct(o.rate)}</div><div class="cmp-sub">${CZK(o.monthly)}/měs · ${sub}</div></div>
+  <button class="btn btn-gold btn-sm cmp-pick" onclick="askLnAccept('${o.id}')">Vybrat</button></div>`;}
+function lnOfferRow(o,i){return `<div class="doffer ${i===0?'top':''}"><div class="oc-l"><div class="av">${o.investor.slice(0,2).toUpperCase()}</div>
+  <div><div class="oi-name">${o.investor} ${vtick()}</div><div class="oi-meta">${i===0?'<span class="badge-top">Nejvýhodnější</span>':''}<span class="mtag">${CZK(o.amount)}</span><span class="mtag">${o.term} ${lnY(o.term)}</span><span class="mtag g" style="background:rgba(201,168,118,.18);color:var(--gold-d)">RPSN ${lnPct(o.rpsn)}</span><span class="mtag">poplatek ${lnPct(o.fee)}</span></div></div></div>
+  <div style="display:flex;align-items:center;gap:14px"><div style="text-align:right"><div class="lno-rate">${lnPct(o.rate)}</div><div style="font-size:11.5px;color:var(--ink-60)">${CZK(o.monthly)}/měs</div></div><button class="btn btn-gold btn-sm" onclick="askLnAccept('${o.id}')">Přijmout</button></div></div>`;}
+function askLnAccept(id){store.ln.confirm=id;render();}
+function lnCloseConfirm(){store.ln.confirm=null;render();}
+function lnConviction(){const o=store.ln.offers.find(x=>x.id===store.ln.confirm);if(!o)return'';
+  return `<div class="modal-bg" onclick="if(event.target===this)lnCloseConfirm()"><div class="modal modal-conv">
+    <button class="modal-x" onclick="lnCloseConfirm()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <div class="conv-top"><div class="owl-float" style="display:inline-block">${owl('happy',86)}</div><div class="conv-h">Přijmout tuto nabídku půjčky?</div>
+      <div class="conv-sub">Rozhodujete vy — závazné je to až po podpisu smlouvy. Do té doby vás nic neváže.</div></div>
+    <div class="modal-c" style="padding-top:16px"><div class="conv-amt">${CZK(o.amount)}</div>
+      <div style="text-align:center"><span class="conv-delta">úrok ${lnPct(o.rate)} · ${CZK(o.monthly)}/měs</span></div>
+      <div class="conv-sum">${convRow('Investor',`${o.investor} ${vtick()}`)}${convRow('Doba splatnosti',o.term+' '+lnY(o.term))}${convRow('RPSN',lnPct(o.rpsn))}${convRow('Celkem zaplatíte',CZK(o.total))}${convRow('Nemovitost','<b style="color:var(--positive)">zůstává vaše</b>')}</div>
+      <div class="conv-note">${icLock(16)}<div>Po přijetí připraví advokát smlouvu a zástavní právo. Peníze nikdy nejdou přes Kuply.</div></div>
+      <div class="conv-acts"><button class="btn btn-ghost" onclick="lnCloseConfirm()">Ještě zvážím</button><button class="btn btn-gold" onclick="acceptLoan('${o.id}')">Závazně přijmout ${icArr()}</button></div></div></div></div>`;}
+function acceptLoan(id){const o=store.ln.offers.find(x=>x.id===id);if(!o)return;store.ln.accepted=o;store.ln.confirm=null;window.scrollTo(0,0);render();}
+function LoanSuccess(){const o=store.ln.accepted;
+  const steps=[['Nabídka přijata','Vybral/a jste nabídku od '+o.investor+'.','done'],['Příprava smlouvy','Advokát chystá úvěrovou smlouvu a zástavu.','active'],['Zápis zástavního práva','Návrh na vklad do katastru.','wait'],['Výplata peněz','Po zápisu vám peníze přijdou na účet.','wait'],['Splácení',CZK(o.monthly)+'/měs po dobu '+o.term+' let.','wait'],['Výmaz zástavy','Po doplacení nemovitost zase bez břemen.','wait']];
+  return `<div style="max-width:720px;margin:0 auto"><div style="text-align:center"><div class="owl-float" style="display:inline-block">${owl('wow',128)}</div>
+    <h1 class="dsp" style="font-size:32px;font-weight:700;margin:6px 0 10px">Nabídka přijata!</h1>
+    <p style="color:var(--ink-70);font-size:15px;max-width:480px;margin:0 auto 8px">Půjčka <b style="color:var(--gold-d)">${CZK(o.amount)}</b> za <b>${lnPct(o.rate)}</b> od ${o.investor}, splátka ${CZK(o.monthly)}/měs. Nemovitost vám zůstává. Teď to přebíráme my.</p></div>
+    <div class="dpanel" style="margin-top:18px"><div class="dpanel-h"><h3>Co bude dál — krok za krokem</h3></div><div class="dpanel-b" style="padding:20px 22px">
+      ${steps.map(s=>`<div class="tl-step ${s[2]}"><div class="tl-rail"><div class="tl-node">${s[2]==='done'?vtick():''}</div><div class="tl-line"></div></div><div class="tl-body"><div class="tl-t">${s[0]}</div><div class="tl-d">${s[1]}</div></div></div>`).join('')}</div></div>
+    <div style="text-align:center;margin-top:24px"><button class="btn btn-ghost" onclick="resetLoan()">Nová žádost</button></div></div>`;}
+function resetLoan(){store.ln.lead=null;store.ln.offers=[];store.ln.accepted=null;store.ln.confirm=null;store.ln.step=0;render();}
+
+/* ---- INVESTOR: tab Půjčky (stejný dashboard, reaguje i na půjčky) ---- */
+const LN_SEED=[
+  {id:'PJ-a1b2',type:'Byt 3+kk',district:'Praha 2 – Vinohrady',m2:84,condition:'Dobrý stav',value:11300000,amount:6500000,term:5,ltv:57.5,vetted:true,ts:now()},
+  {id:'PJ-c3d4',type:'Rodinný dům',district:'Brno – Žabovřesky',m2:140,condition:'Původní stav',value:9800000,amount:7400000,term:10,ltv:75.5,vetted:true,ts:now()},
+  {id:'PJ-e5f6',type:'Komerční prostor',district:'Plzeň – střed',m2:120,condition:'Dobrý stav',value:8200000,amount:3000000,term:3,ltv:36.6,vetted:true,ts:now()}
+];
+function lnAllLeads(){const s=LN_SEED.slice();if(store.ln.lead&&store.ln.lead.vetted)s.unshift(store.ln.lead);return s;}
+function InvestorLoans(){const leads=lnAllLeads();
+  return `<div class="dtop"><div><div class="greet">Investorský přístup · ověřeno ${vtick()}</div><h1>Žádosti o půjčku</h1></div>
+      <div class="dtop-r"><span class="dchip"><span class="live-blink"></span> ${leads.length} aktivních</span></div></div>
+    <div class="dstats">
+      <div class="dstat"><div class="dl">${icGrid()} Aktivní žádosti</div><div class="dv">${leads.length}</div><div class="dsub">nové každý den</div></div>
+      <div class="dstat"><div class="dl">${icCoins(14)} Objem poptávek</div><div class="dv">${CZKm(leads.reduce((a,b)=>a+b.amount,0))}</div><div class="dsub" style="color:var(--ink-50)">celkem půjčky</div></div>
+      <div class="dstat"><div class="dl">${icShield()} Průměrné LTV</div><div class="dv">${leads.length?Math.round(leads.reduce((a,b)=>a+b.ltv,0)/leads.length):0} %</div><div class="dsub" style="color:var(--ink-50)">napříč žádostmi</div></div></div>
+    ${investorTabs('pujcky')}
+    <div class="deal-grid">${leads.map(lnLeadCard).join('')}</div>`;
+}
+function lnLeadCard(l){const col=lnCol(l.ltv);const rk=l.ltv<=60?'low':l.ltv<=80?'mid':'high';const rkl=l.ltv<=60?'Nízké':l.ltv<=80?'Střední':'Vyšší';
+  return `<div class="lnlead" onclick="openLoanLead('${l.id}')">
+    <div class="lnlead-top"><div><div class="lnlead-loc">${l.type} · ${l.district.split('–')[1]?.trim()||l.district}</div><div class="lnlead-spec">${l.m2} m² · ${l.condition}</div></div><span class="lnlead-risk ${rk}">${rkl} riziko</span></div>
+    <div class="lnlead-vfy">${vtick()} Právně prověřeno · LV bez závad</div>
+    <div class="lnlead-amt"><span>Chce půjčit</span><b>${CZKm(l.amount)}</b></div>
+    <div class="lnlead-ltvtop"><span>LTV <b style="color:${col}">${Math.round(l.ltv)} %</b></span><span style="color:var(--ink-50)">hodnota ${CZKm(l.value)}</span></div>
+    <div class="lnbar"><i style="width:${Math.min(100,l.ltv)}%;background:${col}"></i></div>
+    <div class="lnlead-foot"><span>Splatnost ${l.term} ${lnY(l.term)}</span><span class="lnlead-cta">Poslat nabídku ${icArr()}</span></div></div>`;}
+function openLoanLead(id){const l=lnAllLeads().find(x=>x.id===id);store.openLoan=id;store.lnInv={rate:l.ltv<=50?5.9:l.ltv<=70?7.4:9.2,amount:l.amount,term:l.term,fee:1.0};render();}
+function closeLoanLead(){store.openLoan=null;render();}
+function lnInvSet(k,v){store.lnInv[k]=v;render();}
+function lnInvOn(k,v){store.lnInv[k]=+v||0;const l=lnAllLeads().find(x=>x.id===store.openLoan);if(!l)return;const c=lnCalc({amount:store.lnInv.amount,rate:store.lnInv.rate,term:store.lnInv.term,fee:store.lnInv.fee});const myLtv=lnLtv(store.lnInv.amount,l.value);
+  const m=document.getElementById('lni-mo'),lt=document.getElementById('lni-ltv'),g=document.getElementById('lni-guide');
+  if(m)m.textContent=CZK(c.m);if(lt){lt.textContent=Math.round(myLtv)+' % · '+lnPct(c.rpsn);lt.style.color=lnCol(myLtv);}
+  const bar=document.getElementById('lni-bar');if(bar){bar.style.width=Math.min(100,myLtv)+'%';bar.style.background=lnCol(myLtv);}
+  if(g)g.textContent=`LTV ${Math.round(myLtv)} % · ${myLtv<=60?'nízké':myLtv<=80?'střední':'vyšší'} riziko, zástava v prvním pořadí.`;}
+function InvestorLoanDetail(){const l=lnAllLeads().find(x=>x.id===store.openLoan);if(!l)return InvestorLoans();
+  const iv=store.lnInv,c=lnCalc({amount:iv.amount,rate:iv.rate,term:iv.term,fee:iv.fee}),myLtv=lnLtv(iv.amount,l.value),col=lnCol(myLtv);
+  const behind=`<div class="dtop"><div><div class="greet">Investorský přístup</div><h1>Žádosti o půjčku</h1></div></div>${investorTabs('pujcky')}<div class="deal-grid">${lnAllLeads().map(lnLeadCard).join('')}</div>`;
+  return shell('investor',behind)+`<div class="modal-bg" onclick="if(event.target===this)closeLoanLead()"><div class="modal" style="max-width:560px">
+    <div class="modal-c">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start"><div><span class="eyebrow" style="color:var(--gold-d)">${l.district}</span><h2 style="margin-top:6px">${l.type} · ${l.m2} m²</h2></div>
+        <button class="modal-x" style="position:static" onclick="closeLoanLead()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+      <div class="dstats" style="margin-top:14px">
+        <div class="dstat"><div class="dl">Žádá o půjčku</div><div class="dv">${CZKm(l.amount)}</div><div class="dsub">na ${l.term} ${lnY(l.term)}</div></div>
+        <div class="dstat"><div class="dl">Hodnota / LTV</div><div class="dv">${Math.round(l.ltv)} %</div><div class="dsub">${CZKm(l.value)}</div></div>
+        <div class="dstat"><div class="dl">Stav</div><div class="dv" style="font-size:16px;color:var(--positive)">Prověřeno</div><div class="dsub">${l.condition}</div></div></div>
+      <div class="dpanel" style="margin-top:6px"><div class="dpanel-b" style="padding:18px">
+        <h3 style="font-size:16px;font-weight:700;margin-bottom:14px">Vaše nabídka půjčky</h3>
+        <div class="row2"><div class="field" style="margin-bottom:0"><label>Úrok p.a. (%)</label><input type="number" step="0.1" value="${iv.rate}" oninput="lnInvOn('rate',this.value)"></div>
+          <div class="field" style="margin-bottom:0"><label>Nabízená částka (Kč)</label><input type="number" value="${iv.amount}" oninput="lnInvOn('amount',this.value)"></div></div>
+        <div class="field" style="margin:12px 0 0"><label>Doba splatnosti</label><div class="chipset">${[1,3,5,10,15].map(y=>`<button class="chip ${y===iv.term?'on':''}" onclick="lnInvSet('term',${y})">${y} ${y===1?'rok':y<5?'roky':'let'}</button>`).join('')}</div></div>
+        <div class="field" style="margin:12px 0 0"><label>Jednorázový poplatek (%)</label><input type="number" step="0.1" value="${iv.fee}" oninput="lnInvOn('fee',this.value)"></div>
+        <div class="row2" style="margin-top:14px">
+          <div class="dstat"><div class="dl">Měsíční splátka žadatele</div><div class="dv" id="lni-mo" style="font-size:18px">${CZK(c.m)}</div></div>
+          <div class="dstat"><div class="dl">Vaše LTV / RPSN</div><div class="dv" id="lni-ltv" style="font-size:18px;color:${col}">${Math.round(myLtv)} % · ${lnPct(c.rpsn)}</div></div></div>
+        <div class="lnbar" style="margin-top:12px"><i id="lni-bar" style="width:${Math.min(100,myLtv)}%;background:${col}"></i></div>
+        <div class="lnguide" style="margin-top:13px"><span id="lni-guide">LTV ${Math.round(myLtv)} % · ${myLtv<=60?'nízké':myLtv<=80?'střední':'vyšší'} riziko, zástava v prvním pořadí.</span></div>
+        <button class="btn btn-gold btn-block" style="margin-top:14px" onclick="submitLoanOffer()">Odeslat nabídku půjčky ${icArr()}</button></div></div></div></div></div>`;}
+function submitLoanOffer(){const l=lnAllLeads().find(x=>x.id===store.openLoan),iv=store.lnInv;
+  if(!iv.amount||iv.amount<100000){toast('Zadejte nabízenou částku');return;}
+  if(store.ln.lead&&l&&l.id===store.ln.lead.id){const o={investor:'Petr Investor',rate:iv.rate,amount:iv.amount,term:iv.term,fee:iv.fee};pushLoanOffer(o);}
+  store.openLoan=null;toast('Nabídka odeslána · žadatel ji vidí v reálném čase');render();}
+function investorTabs(active){
+  const t=[['flow','Tržiště'],['mine','Moje nabídky'],['won','Vyhrané'],['pujcky','Půjčky'],['programs','Programy'],['offmarket','Off-market'],['faq','Otázky']];
+  return `<div class="tabs">${t.map(x=>`<div class="tab ${x[0]===active?'active':''}" onclick="store.openDeal=null;store.openWon=null;store.openLoan=null;store.tab='${x[0]}';render()">${x[1]}</div>`).join('')}</div>`;
+}
+
 /* ===================== TICKERS / INIT ===================== */
 setInterval(()=>{document.querySelectorAll('[data-cd]').forEach(el=>el.textContent=fmtLeft(+el.dataset.cd));document.querySelectorAll('[data-cdbar]').forEach(el=>{const[dl,h]=el.dataset.cdbar.split('|').map(Number);el.style.width=Math.max(2,Math.min(100,(dl-now())/(h*3600*1000)*100))+'%';});},1000);
 setInterval(()=>{if(store.view!=='landing')return;const list=document.getElementById('feedList');if(!list)return;const f=FEED_POOL[Math.floor(Math.random()*FEED_POOL.length)];store.feed.unshift(f);store.feed=store.feed.slice(0,6);list.insertAdjacentHTML('afterbegin',feedRow(f));while(list.children.length>6)list.removeChild(list.lastChild);},4200);
@@ -6587,12 +7091,136 @@ window.kuplyGo=go;
 window.kuplyLaunch=function(d){
   const est=Math.round((d.portal||4500000)/10000)*10000;
   const p=mkProp(d.loc||'Praha',(d.type||'Byt'),Math.max(15,Math.round(d.m2||70)),'2. patro','Dobrý stav',est,48,d.addr||'');
-  p.escrow='advokat';store.properties.unshift(p);store.myPropId=p.id;scheduleMockOffers(p);
-  setTimeout(()=>{if(p.status!=='active')return;pushOffer(p,'Privátní investor',(d.priv||est*1.05)*(1+Math.random()*0.015),true,false);if(store.view==='seller')toast('Nová nabídka — nad odhadem');},21000);
-  go('seller');toast('Sbíráme nabídky · první do pár minut');
+  p.escrow='advokat';p.vetted=false;store.properties.unshift(p);store.myPropId=p.id;scheduleVetting(p);
+  setTimeout(()=>{if(p.status!=='active'||!p.vetted)return;pushOffer(p,'Privátní investor',(d.priv||est*1.05)*(1+Math.random()*0.015),true,false);if(store.view==='seller')toast('Nová nabídka — nad odhadem');},21000);
+  go('seller');toast('Nemovitost přijata · spouštíme právní prověření');
 };
+window.kuplyLoan=function(d){d=d||{};const dr=store.ln.draft;if(d.prop)dr.propNote=String(d.prop).trim();if(d.amount){const a=+String(d.amount).replace(/[^\d]/g,'');if(a)dr.amount=a;}if(d.term)dr.term=d.term;if(d.phone)dr.phone=d.phone;store.ln.step=0;store.ln.lead=null;store.ln.accepted=null;go('loan');};
 window.setBg=function(b){store.bg=b;render();};
 (function(){var W=['vaši nemovitost','váš byt','váš dům','váš pozemek','vaši chalupu'];var ci=0;setInterval(function(){var el=document.getElementById('cycleWord');if(!el)return;el.classList.add('cyc-out');setTimeout(function(){ci=(ci+1)%W.length;el.textContent=W[ci];el.classList.remove('cyc-out');el.classList.add('cyc-in');setTimeout(function(){el.classList.remove('cyc-in');},460);},300);},3400);})();
 </script>
+<style>
+/* ===== PŮJČKY (loan) ===== */
+#dashWrap .lnflow{min-height:calc(100vh - 58px);display:flex;align-items:flex-start;justify-content:center;padding:40px 20px}
+#dashWrap .lnflow-card{width:100%;max-width:620px;background:rgba(255,253,247,.72);backdrop-filter:blur(22px) saturate(1.3);-webkit-backdrop-filter:blur(22px) saturate(1.3);border:1px solid rgba(255,255,255,.6);box-shadow:var(--sh-lg);border-radius:26px;padding:30px 32px}
+@media(max-width:560px){#dashWrap .lnflow-card{padding:22px 18px}}
+#dashWrap .lnflow-brand{display:flex;align-items:center;gap:9px;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;margin-bottom:18px}
+#dashWrap .lnflow-brand span{font-weight:500;color:var(--ink-50);font-size:13px}
+#dashWrap .lnprog{display:flex;gap:6px;margin-bottom:22px}
+#dashWrap .lnprog i{height:5px;flex:1;border-radius:99px;background:rgba(61,54,46,.10);transition:.4s}
+#dashWrap .lnprog i.on{background:var(--g-gold)}
+#dashWrap .lnstep{animation:stepIn .4s cubic-bezier(.2,.8,.2,1)}
+#dashWrap .lnstep h2{font-size:23px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;letter-spacing:-.02em}
+#dashWrap .lnstep .sub{color:var(--ink-60);font-size:14.5px;margin:6px 0 18px;line-height:1.5}
+#dashWrap .chip.on{border-color:var(--gold-d);background:rgba(201,168,118,.14);color:var(--gold-d)}
+#dashWrap .lngauge{margin:16px 0 4px;padding:16px;border-radius:14px;background:rgba(255,255,255,.5);border:1px solid var(--brd)}
+#dashWrap .lngauge-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+#dashWrap .lngauge-top b{font-size:23px;font-weight:700;font-family:'JetBrains Mono',monospace}
+#dashWrap .lnbar{height:10px;border-radius:99px;background:rgba(61,54,46,.10);overflow:hidden}
+#dashWrap .lnbar i{display:block;height:100%;border-radius:99px;transition:.5s cubic-bezier(.2,.8,.2,1)}
+#dashWrap .lnzones{display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink-45);margin-top:6px;font-weight:600}
+#dashWrap .lnnote{font-size:12.5px;margin-top:9px;font-weight:600}
+#dashWrap .valopts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+@media(max-width:480px){#dashWrap .valopts{grid-template-columns:1fr}}
+#dashWrap .valopt{text-align:left;border:1.5px solid var(--line);border-radius:15px;padding:14px 15px;background:rgba(255,255,255,.5);transition:.18s;display:flex;flex-direction:column;font-family:inherit;cursor:pointer}
+#dashWrap .valopt:hover{border-color:rgba(201,168,118,.5)}
+#dashWrap .valopt.on{border-color:var(--gold-d);background:rgba(201,168,118,.10);box-shadow:0 0 0 3px rgba(201,168,118,.14)}
+#dashWrap .valopt .vi{width:30px;height:30px;border-radius:9px;background:rgba(201,168,118,.16);color:var(--gold-d);display:grid;place-items:center;margin-bottom:7px}
+#dashWrap .valopt .vi svg{width:18px;height:18px}
+#dashWrap .valopt b{font-size:14px;display:block}
+#dashWrap .valopt span{font-size:11.5px;color:var(--ink-60);margin-top:2px}
+#dashWrap .lnup{border:1.5px dashed var(--line);border-radius:15px;padding:24px;text-align:center;cursor:pointer;background:rgba(255,255,255,.4);transition:.18s}
+#dashWrap .lnup:hover{border-color:var(--gold)}
+#dashWrap .lnup.done{border-style:solid;border-color:rgba(94,124,79,.5);background:rgba(94,124,79,.07)}
+#dashWrap .lnup svg{width:34px;height:34px;color:var(--ink-30);margin:0 auto}
+#dashWrap .lnup.done svg{color:var(--positive)}
+#dashWrap .lnnav{display:flex;gap:10px;margin-top:22px}
+#dashWrap .lnnav .btn{flex:1;justify-content:center}
+#dashWrap .lnguide{margin-top:16px;padding:12px 14px;border-radius:13px;background:rgba(201,168,118,.10);border:1px solid rgba(201,168,118,.28);font-size:12.5px;color:var(--gold-deep);line-height:1.5;display:flex;gap:10px;align-items:flex-start}
+#dashWrap .lnguide .so{flex:none}
+#dashWrap .lnguide .so svg{width:22px;height:22px}
+#dashWrap .lnguide b{color:var(--gold-d);font-weight:700}
+#dashWrap .lno-rate{font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:600;color:var(--gold-d)}
+#dashWrap .lncard .kv{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0}
+#dashWrap .lncard .kv b{font-family:'JetBrains Mono',monospace;font-size:15px}
+/* půjčkový lead card (investor) */
+#dashWrap .lnlead{cursor:pointer;display:flex;flex-direction:column;gap:11px;padding:18px;border-radius:18px;background:rgba(255,253,247,.55);border:1px solid rgba(255,255,255,.6);backdrop-filter:blur(20px) saturate(1.2);-webkit-backdrop-filter:blur(20px) saturate(1.2);box-shadow:var(--sh-s);transition:.2s}
+#dashWrap .lnlead:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+#dashWrap .lnlead-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+#dashWrap .lnlead-loc{font-size:15px;font-weight:700}
+#dashWrap .lnlead-spec{font-size:12.5px;color:var(--ink-60);margin-top:2px}
+#dashWrap .lnlead-risk{font-size:10.5px;font-weight:700;padding:4px 9px;border-radius:20px;white-space:nowrap;flex:none}
+#dashWrap .lnlead-risk.low{background:rgba(107,138,86,.16);color:var(--positive)}
+#dashWrap .lnlead-risk.mid{background:rgba(201,168,118,.18);color:var(--gold-d)}
+#dashWrap .lnlead-risk.high{background:rgba(181,102,58,.14);color:var(--rust)}
+#dashWrap .lnlead-vfy{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--positive)}
+#dashWrap .lnlead-vfy .veritick{width:13px;height:13px}
+#dashWrap .lnlead-amt{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-top:1px solid var(--brd);border-bottom:1px solid var(--brd)}
+#dashWrap .lnlead-amt span{font-size:12.5px;color:var(--ink-60)}
+#dashWrap .lnlead-amt b{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:var(--gold-d)}
+#dashWrap .lnlead-ltvtop{display:flex;justify-content:space-between;font-size:12.5px;font-weight:600}
+#dashWrap .lnlead-foot{display:flex;justify-content:space-between;align-items:center;margin-top:2px}
+#dashWrap .lnlead-foot>span:first-child{font-size:12.5px;color:var(--ink-60)}
+#dashWrap .lnlead-cta{font-size:13px;font-weight:700;color:var(--gold-d);display:inline-flex;align-items:center;gap:5px}
+#dashWrap .lnlead-cta .ic{width:15px;height:15px}
+#dashWrap .lntrust{display:flex;flex-wrap:wrap;gap:16px;margin-top:18px;padding-top:16px;border-top:1px solid var(--brd)}
+#dashWrap .lntrust span{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--ink-60);font-weight:500}
+#dashWrap .lntrust svg{width:14px;height:14px;color:var(--positive)}
+/* ===== BEAUTIFY: dashboardy ===== */
+#dashWrap .dstats{gap:18px}
+#dashWrap .dstat{background:linear-gradient(162deg,rgba(255,253,247,.85),rgba(243,235,215,.42));border:1px solid rgba(255,255,255,.72);box-shadow:0 1px 2px rgba(61,54,46,.04),0 18px 38px -20px rgba(61,54,46,.20);position:relative;overflow:hidden;transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+#dashWrap .dstat::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--g-gold);opacity:.6}
+#dashWrap .dstat:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(61,54,46,.05),0 30px 56px -22px rgba(61,54,46,.28)}
+#dashWrap .dpanel{box-shadow:0 1px 3px rgba(61,54,46,.04),0 28px 56px -26px rgba(61,54,46,.18)}
+#dashWrap .snav{position:relative}
+#dashWrap .snav:hover{background:rgba(201,168,118,.10);color:var(--ink)}
+#dashWrap .snav:hover svg{color:var(--gold-d)}
+#dashWrap .snav.active{background:linear-gradient(135deg,rgba(201,168,118,.20),rgba(201,168,118,.07));color:var(--ink);box-shadow:inset 3px 0 0 var(--gold-d)}
+#dashWrap .dtop h1{background:linear-gradient(118deg,var(--cocoa) 35%,var(--gold-d));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+/* ===== BEAUTIFY: hero carousel ===== */
+.lc-card{box-shadow:0 48px 96px -38px rgba(61,54,46,.40),0 12px 28px -14px rgba(61,54,46,.16),inset 0 1px 0 rgba(255,255,255,.95),inset 1px 0 0 rgba(255,255,255,.4),inset -1px 0 0 rgba(255,255,255,.22)}
+.lc-card.dark{box-shadow:0 50px 100px -38px rgba(31,26,19,.58),0 12px 30px -14px rgba(31,26,19,.3),inset 0 1px 0 rgba(224,201,151,.35),inset 1px 0 0 rgba(224,201,151,.12)}
+.lc-pill{transition:all .22s cubic-bezier(.2,.8,.2,1)}
+.lc-pill.on{box-shadow:0 8px 18px -8px rgba(61,54,46,.5)}
+.entry-card-eyebrow{margin-bottom:20px}
+#dashWrap .deal{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+#dashWrap .deal:hover{transform:translateY(-3px);box-shadow:0 1px 3px rgba(61,54,46,.05),0 32px 60px -24px rgba(61,54,46,.26)}
+#dashWrap .side-brand b{background:linear-gradient(120deg,var(--cocoa),var(--gold-d));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+#dashWrap .dchip{box-shadow:0 1px 2px rgba(61,54,46,.05)}
+/* ===== CTA: živé, svítící za buttonem + přejíždějící odlesk ===== */
+.btn-primary{position:relative!important;isolation:isolate!important;
+  background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 60%),linear-gradient(135deg,var(--gold-l) 0%,var(--gold) 48%,var(--rust-l) 130%)!important;
+  background-size:260% 100%,100% 100%!important;background-position:210% 0,0 0!important;background-repeat:no-repeat!important;
+  color:var(--cocoa-deep)!important;font-weight:700!important;
+  box-shadow:0 14px 34px -10px rgba(201,168,118,.85),0 2px 8px -2px rgba(61,54,46,.22),inset 0 1px 0 rgba(255,255,255,.55)!important;
+  animation:ctaShine 4.2s cubic-bezier(.5,0,.4,1) infinite!important;
+  transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s!important}
+.btn-primary::before{content:''!important;position:absolute!important;inset:-7px!important;z-index:-1!important;border-radius:inherit!important;pointer-events:none!important;
+  background:radial-gradient(60% 130% at 50% 50%,rgba(224,201,151,.95),rgba(208,136,85,.55) 55%,transparent 74%)!important;
+  filter:blur(14px)!important;opacity:.5!important;animation:ctaGlow 2.6s ease-in-out infinite!important}
+@keyframes ctaShine{0%,22%{background-position:210% 0,0 0}56%,100%{background-position:-160% 0,0 0}}
+@keyframes ctaGlow{0%,100%{opacity:.36;transform:scale(.96)}50%{opacity:.82;transform:scale(1.05)}}
+.btn-primary:hover{transform:translateY(-2px)!important;box-shadow:0 22px 48px -10px rgba(201,168,118,1),0 5px 14px -2px rgba(61,54,46,.3),inset 0 1px 0 rgba(255,255,255,.7)!important}
+.btn-primary:hover::before{opacity:.98!important;animation-duration:1.5s!important}
+.btn-primary .arr{background:var(--cocoa-deep)!important;color:var(--gold-l)!important;transition:transform .22s!important}
+.btn-primary:hover .arr{transform:translateX(3px) rotate(-3deg)!important}
+/* záře i pro velká gold/rust CTA (jen efekt, žádná per-button sova) */
+.btn-gold.btn-lg,.btn-pri.btn-lg{position:relative;isolation:isolate;transition:transform .22s cubic-bezier(.2,.8,.2,1),box-shadow .22s}
+.btn-gold.btn-lg::before,.btn-pri.btn-lg::before{content:'';position:absolute;inset:-7px;z-index:-1;border-radius:inherit;pointer-events:none;background:radial-gradient(60% 130% at 50% 50%,rgba(224,201,151,.9),rgba(208,136,85,.5) 55%,transparent 74%);filter:blur(14px);opacity:.42;animation:ctaGlow 2.8s ease-in-out infinite}
+.btn-gold.btn-lg:hover,.btn-pri.btn-lg:hover{transform:translateY(-2px)}
+.btn-gold.btn-lg:hover::before,.btn-pri.btn-lg:hover::before{opacity:.92}
+@media (prefers-reduced-motion:reduce){.btn-primary,.btn-primary::before,.btn-gold.btn-lg::before,.btn-pri.btn-lg::before{animation:none!important}}
+/* ===== KUPLY GLOW: světlo běžící po okraji karty (à la AMO) ===== */
+@property --kg-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+.kuply-glow,.modal-conv{position:relative}
+.kuply-glow::after,.lc-card::after,.modal-conv::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.6px;pointer-events:none;z-index:3;
+  background:conic-gradient(from var(--kg-angle),transparent 0deg 64deg,rgba(224,201,151,.12) 82deg,var(--gold-l) 96deg,#F2DEB6 104deg,var(--rust-l) 116deg,rgba(208,136,85,.18) 134deg,transparent 152deg 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:kgRun 4.6s linear infinite}
+@keyframes kgRun{to{--kg-angle:360deg}}
+@media (prefers-reduced-motion:reduce){.kuply-glow::after,.lc-card::after,.modal-conv::after{animation:none}}
+/* jen JEDNA Sofi = ta létající (v body); statické owly v landingu pryč */
+#root .owl,#root .sf-mount{display:none!important}
+</style>
 </body>
 </html>
