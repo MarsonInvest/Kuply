@@ -1,0 +1,22 @@
+# === Nepatří do repa / na Vercel ===
+
+# ffmpeg zdrojový kód (omylem stažený tarball — 1897 souborů, NE binárka)
+ffmpeg-8.1.2/
+
+# Přesunutá těžká videa (jsou mimo projekt, ale pro jistotu)
+_heavy_videos_removed/
+
+# Zálohy a dočasné soubory
+*.bak
+*.bak-*
+*.tmp.mp4
+*~
+
+# OS smetí
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Velká média jako pojistka proti GitHub limitu 100 MB / pomalému Vercelu.
+# Pokud sem dáš video, drž ho pod ~10 MB (1080p, bez zvuku, +faststart).
+# (Velká 4K/60fps videa do statického hostingu nepatří — použij CDN: Cloudflare R2 / Bunny / Vercel Blob.)
